@@ -8,15 +8,7 @@ const User = database.define("user", {
     primaryKey: true,
     autoIncrement: true,
   },
-  student_name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  isStudent: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false,
-  },
-  hogwartsHouse: {
+  user_name: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -24,13 +16,16 @@ const User = database.define("user", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  /*spells: {
-    type: Sequelize.VIRTUAL,
-    references: {
-      model: Spell,
-      key: "wizard",
-    },
-  },*/
+  isChef: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+  },
+  dietary_restrictions: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+ 
+ 
 });
 
 module.exports = {

@@ -6,5 +6,6 @@ npm install
 npm install sqlite3
 npm install express
 npm install sequelize
+npm install bcrypt
 npm start -dev
 npm start client -server

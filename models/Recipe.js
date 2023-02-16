@@ -10,16 +10,16 @@ const Recipe = database.define("recipe", {
     timeStamps: true,
   },
 
-  spellName: {
+  recipeName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  description: {
+  ingredients: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  itemType: {
-    type: Sequelize.STRING,
+  isVegan: {
+    type: Sequelize.BOOLEAN,
     allowNull: false,
   },
   userId: {
