@@ -1,4 +1,4 @@
-const spell = [
+const recipe = [
   {
     id: 1,
     spellName: "Accio",
@@ -159,5 +159,5 @@ const spell = [
 ];
 
 module.exports = {
-  spell,
+  recipe,
 };

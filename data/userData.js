@@ -1,4 +1,4 @@
-const wizard = [
+const user = [
   {
     id: 1,
     student_name: "Harry Potter",
@@ -66,5 +66,5 @@ const wizard = [
 ];
 
 module.exports = {
-  wizard,
+  user,
 };

@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 const { database } = require("../db");
-const Spell = require("./Spell");
+const Recipe = require("./Recipe");
 
-const Wizard = database.define("wizard", {
+const User = database.define("user", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -34,5 +34,5 @@ const Wizard = database.define("wizard", {
 });
 
 module.exports = {
-  Wizard,
+  User,
 };

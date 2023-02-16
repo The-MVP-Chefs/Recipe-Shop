@@ -1,5 +1,5 @@
-const { Spell } = require("./Spell");
-const { Wizard } = require("./Wizard");
+const { Recipe} = require("./Recipe");
+const { User } = require("./User");
 // const {socialSecurityNumber} = require("./Social");
 // const {User} = require("./User");
 
@@ -40,9 +40,9 @@ const { Wizard } = require("./Wizard");
 // Social.belongsTo(User);
 
 //One-To-Many Relationship
-Wizard.hasMany(Spell, { as: "spells", foreignKey: "wizardId" });
+User.hasMany(Recipe, { as: "recipes", foreignKey: "userId" });
 
 module.exports = {
-  Spell,
-  Wizard,
+  Recipe,
+  User,
 };
