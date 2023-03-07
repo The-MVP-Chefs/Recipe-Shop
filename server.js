@@ -1,35 +1,20 @@
-const express = require("express");
-const app = express();
+const { db } = require("./server/models");
+const app = require("./server/app");
+//const seed = require("./seed")
 
-// This is for the database
-const { seed } = require("./data/index");
-const { Recipe } = require("./models/Recipe");
-const { User } = require("./models/User");
+const PORT = process.env.PORT || 3000;
 
-const bcrypt = require("bcrypt");
-//const jwt = require("jsonwebtoken");
+const init = async () => {
+  try {
+    await db.sync();
 
-// require("dotenv").config();
-// const { PORT, ACCESS_TOKEN_SECRET } = process.env;
+    app.listen(PORT, () => {
+      console.log(`Server listening at http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('Error starting server:', error)
+  }
+};
 
-
-
-//Yohonna: get all wizards
-app.get("/recipes", async (req, res) => {
-  let recipe = await Recipe.findAll(req.params.id, {
-    include: {
-      model: Recipe,
-      as: "recipes",
-    },
-  });
-  res.send(recipe);
-});
-
-var PORT=3000;
-
-app.listen(PORT, () => {
-  seed();
-  console.log(`App listening on http://localhost:${PORT}`);
-});
-
-
+init();
+//seed();
