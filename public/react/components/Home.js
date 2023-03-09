@@ -46,7 +46,11 @@ export const Home = ({ setIsHome, setRecipes,setIsLoggedIn, setIsRegistered }) =
       <Button
         variant="primary"
         type="submit"
-        onClick={() =>  setIsLoggedIn(true) && setIsHome(false)  }
+        onClick={() =>  {
+          setIsLoggedIn(true)
+          setIsHome(false) 
+           setIsRegistered(false)
+        }}
       >
         Login
       </Button>
@@ -56,7 +60,11 @@ export const Home = ({ setIsHome, setRecipes,setIsLoggedIn, setIsRegistered }) =
       <Button
         variant="warning"
         type="submit"
-        onClick={() => setIsRegistered(true) && setIsHome(false)}
+        onClick={() => {
+          setIsRegistered(true)
+          setIsHome(false)
+          setIsLoggedIn(false)
+        }}
       >
         Register Account
       </Button>

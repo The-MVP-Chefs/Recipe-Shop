@@ -36266,13 +36266,17 @@ var Home = function Home(_ref) {
     variant: "primary",
     type: "submit",
     onClick: function onClick() {
-      return setIsLoggedIn(true) && setIsHome(false);
+      setIsLoggedIn(true);
+      setIsHome(false);
+      setIsRegistered(false);
     }
   }, "Login"), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement(_Button.default, {
     variant: "warning",
     type: "submit",
     onClick: function onClick() {
-      return setIsRegistered(true) && setIsHome(false);
+      setIsRegistered(true);
+      setIsHome(false);
+      setIsLoggedIn(false);
     }
   }, "Register Account")));
 };
@@ -36958,7 +36962,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56827" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58809" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
