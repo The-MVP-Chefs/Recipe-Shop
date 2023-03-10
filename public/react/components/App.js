@@ -78,7 +78,7 @@ export const App = () => {
       ) : isLoggedIn ? (
         <Login setIsLoggedIn={setIsLoggedIn} setIsHome={setIsHome} />
       ) : singleViewUser ? (
-        <SingleViewUser
+        <singleViewUser
           props={singleViewUser}
           setSingleViewUser={setSingleViewUser}
           handleClick={fetchSingleUser}
