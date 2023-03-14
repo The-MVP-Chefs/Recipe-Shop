@@ -29498,7 +29498,6 @@ var SingleViewRecipe = function SingleViewRecipe(_ref) {
     isDeleted = _ref.isDeleted,
     setIsDeleted = _ref.setIsDeleted,
     setIsUpdating = _ref.setIsUpdating;
-  console.log(setIsUpdating);
   function handleDelete(_x) {
     return _handleDelete.apply(this, arguments);
   }
@@ -31604,7 +31603,6 @@ var Login = function Login(_ref) {
   var setIsLoggedIn = _ref.setIsLoggedIn,
     setIsHome = _ref.setIsHome,
     setSingleViewUser = _ref.setSingleViewUser;
-  console.log("login");
   //make the form
   var _useState = (0, _react.useState)(""),
     _useState2 = _slicedToArray(_useState, 2),
@@ -31616,44 +31614,21 @@ var Login = function Login(_ref) {
     setPassword = _useState4[1];
   function handleLogin(_x2) {
     return _handleLogin.apply(this, arguments);
-  } // function refreshPage() {
-  //   window.location.reload(false);
-  // }
+  }
   function _handleLogin() {
     _handleLogin = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(ev) {
-      var response, data;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            console.log("testingLogin");
-            // event.preventDefault();
-            _context.next = 3;
-            return fetch("".concat(_api.default, "/users/"), {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                user_name: user_name,
-                password: password
-              })
-            });
-          case 3:
-            response = _context.sent;
-            _context.next = 6;
-            return response.json();
-          case 6:
-            data = _context.sent;
-            setIsLoggedIn(null);
-            setSingleViewUser(true);
-            refreshPage();
-          case 10:
           case "end":
             return _context.stop();
         }
       }, _callee);
     }));
     return _handleLogin.apply(this, arguments);
+  }
+  function refreshPage() {
+    window.location.reload(false);
   }
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", {
     class: "title"
@@ -32053,7 +32028,8 @@ var App = function App() {
     setIsRegistered: setIsRegistered
   }) : isLoggedIn ? /*#__PURE__*/_react.default.createElement(_Login.Login, {
     setIsLoggedIn: setIsLoggedIn,
-    setIsHome: setIsHome
+    setIsHome: setIsHome,
+    setSingleViewUser: setSingleViewUser
   }) : singleViewUser ? /*#__PURE__*/_react.default.createElement(SingleViewUser, {
     props: singleViewUser,
     setSingleViewUser: setSingleViewUser,

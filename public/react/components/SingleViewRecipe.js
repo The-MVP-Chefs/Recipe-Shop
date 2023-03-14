@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 
 export const SingleViewRecipe = ({props,setSingleViewRecipe, isDeleted, setIsDeleted, setIsUpdating}) => {
- console.log(setIsUpdating)
+
   async function handleDelete(ev) {
     const response = await fetch(`${apiURL}/recipes/${props.id}`, {
       method: "DELETE",

@@ -6,12 +6,20 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 
-export const SingleViewUser = ({props}) => {
-console.log('here')
-
-  // function refreshPage() {
-  //   window.location.reload(false);
-  // }
+export const SingleViewUser = ({props,setSingleViewUser,}) => {
+console.log("IT WORKED!");
+  async function fetchSingleUser(id) {
+    try {
+      const response = await fetch(`${apiURL}/users/${id}`);
+      const user = await response.json();
+      setSingleViewUser(user);
+    } catch (err) {
+      console.log("Oh no an error! ", err);
+    }
+  }
+  function refreshPage() {
+    window.location.reload(false);
+  }
     return (
     <>
    
@@ -23,7 +31,7 @@ console.log('here')
           </Card.Body>
            <ListGroup className="list-group-flush">
             <ListGroup.Item>{props.dietary_restrictions}</ListGroup.Item>
-            {/* <ListGroup.Item>User Id{props.userId}</ListGroup.Item> */}
+           
           </ListGroup>
         
          </Card>
