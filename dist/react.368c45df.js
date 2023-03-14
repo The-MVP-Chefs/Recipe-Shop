@@ -29498,6 +29498,7 @@ var SingleViewRecipe = function SingleViewRecipe(_ref) {
     isDeleted = _ref.isDeleted,
     setIsDeleted = _ref.setIsDeleted,
     setIsUpdating = _ref.setIsUpdating;
+  console.log(setIsUpdating);
   function handleDelete(_x) {
     return _handleDelete.apply(this, arguments);
   }
@@ -32070,6 +32071,7 @@ var App = function App() {
   }) : singleViewRecipe ? /*#__PURE__*/_react.default.createElement(_SingleViewRecipe.SingleViewRecipe, {
     props: singleViewRecipe,
     setSingleViewRecipe: setSingleViewRecipe,
+    setIsUpdating: setIsUpdating,
     handleClick: fetchSingleRecipe
   }) : /*#__PURE__*/_react.default.createElement("div", {
     id: "recipes"
@@ -32125,7 +32127,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51065" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51623" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

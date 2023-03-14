@@ -97,6 +97,7 @@ export const App = () => {
         <SingleViewRecipe
           props={singleViewRecipe}
           setSingleViewRecipe={setSingleViewRecipe}
+          setIsUpdating={setIsUpdating}
           handleClick={fetchSingleRecipe}
         />
       ) : (
