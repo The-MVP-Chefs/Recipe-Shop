@@ -6,7 +6,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 
-export const SingleViewRecipe = ({props,setSingleViewRecipe, isDeleted, setIsDeleted, setIsUpdating}) => {
+export const SingleViewRecipe = ({props,setSingleViewRecipe, isDeleted, setIsDeleted,isUpdating, setIsUpdating}) => {
+  
   async function handleDelete(ev) {
     const response = await fetch(`${apiURL}/recipes/${props.id}`, {
       method: "DELETE",
@@ -31,7 +32,7 @@ export const SingleViewRecipe = ({props,setSingleViewRecipe, isDeleted, setIsDel
           </Card.Body>
            <ListGroup className="list-group-flush">
             <ListGroup.Item>{props.isVegan}</ListGroup.Item>
-            {/* <ListGroup.Item>User Id{props.userId}</ListGroup.Item> */}
+           
           </ListGroup>
           <Card.Body>
             <Button onClick={handleDelete} variant="danger">

@@ -46,4 +46,6 @@ After installing these packages, you can start the server by running the followi
 To start the client server, use the following command:
 
 - `npm start client -server`
-
+npm run seed
+npm run server-dev
+In a seperate terminal, npm run client-dev
