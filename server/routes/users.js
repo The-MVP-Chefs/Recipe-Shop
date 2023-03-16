@@ -5,7 +5,7 @@ const router = express();
 const { seed } = require("../seed");
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
+ const jwt = require("jsonwebtoken");
 router.use(express.json());
 router.use(express.urlencoded({ extended:true}));
 
@@ -33,27 +33,27 @@ router.get("/:id", async (req, res, next) => {
 });
 
 
-// const authUser = async (req, res, next) => {
-//   const auth = req.header("Authorization");
-//   console.log("Auth: ", auth);
+const authUser = async (req, res, next) => {
+  const auth = req.header("Authorization");
+  console.log("Auth: ", auth);
 
-//   if (!auth) {
-//     console.log("The user isn't authorized...");
-//     next(); // move on to the next function
-//   } else {
-//     // Array Deconstruction, we don't need the Bearer part, only need token
-//     const [, token] = auth.split(" "); // spliting the authentication string by space
-//     console.log("Token: ", token);
-//     if (token == null) return res.sendStatus(401);
+  if (!auth) {
+    console.log("The user isn't authorized...");
+    next(); // move on to the next function
+  } else {
+    // Array Deconstruction, we don't need the Bearer part, only need token
+    const [, token] = auth.split(" "); // spliting the authentication string by space
+    console.log("Token: ", token);
+    if (token == null) return res.sendStatus(401);
 
-//     // Check the validity of the token
-//     jwt.verify(token, ACCESS_TOKEN_SECRET, (err, user) => {
-//       if (err) return res.sendStatus(403);
-//       req.user = user;
-//       next();
-//     });
-//   }
-// };
+    // Check the validity of the token
+    jwt.verify(token, ACCESS_TOKEN_SECRET, (err, user) => {
+      if (err) return res.sendStatus(403);
+      req.user = user;
+      next();
+    });
+  }
+};
 
 
 
@@ -69,7 +69,7 @@ router.post("/register", async (req, res, next) => {
 
 
 
-// DELETE /items/:id
+// DELETE /user/:id
 router.delete("/:id", async (req, res, next) => {
   try {
     let user = await User.findByPk(req.params.id);
@@ -79,6 +79,7 @@ router.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
 router.post("/login", async (req, res, next) => {
   try {
     let { user_name, password } = req.body;
@@ -107,48 +108,48 @@ router.post("/login", async (req, res, next) => {
 });
 
 //login a user and check that their info matches database
-// router.post("/login", authUser, async (req, res, next) => {
-//   try {
-//     let { user_name, password } = req.body;
-//     let loginUser = await User.findOne({
-//       where: { user_name },
-//     });
+router.post("/login", authUser, async (req, res, next) => {
+  try {
+    let { user_name, password } = req.body;
+    let loginUser = await User.findOne({
+      where: { user_name },
+    });
 
-//     // Authenticate the loginUser
-//     let isMatching = await bcrypt.compare(password, loginUser.password);
-//     if (isMatching) {
-//       // If True, the loginUser successfully logged in.
-//       //  Deconstructing the User Object by its properties/fields.
-//       const { id, user_name } = loginUser;
-//       let payload = { id, user_name };
+    // Authenticate the loginUser
+    let isMatching = await bcrypt.compare(password, loginUser.password);
+    if (isMatching) {
+      // If True, the loginUser successfully logged in.
+      //  Deconstructing the User Object by its properties/fields.
+      const { id, user_name } = loginUser;
+      let payload = { id, user_name };
 
-//       // Generate a token with payload and a secret
-//       const token = jwt.sign(payload, ACCESS_TOKEN_SECRET);
-//       res.send({ message: "Successful Login", token });
-//     } else {
-//       res.send("Please enter the correct password and try again.");
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     next(error);
-//   }
-// });
+      // Generate a token with payload and a secret
+      const token = jwt.sign(payload, ACCESS_TOKEN_SECRET);
+      res.send({ message: "Successful Login", token });
+    } else {
+      res.send("Please enter the correct password and try again.");
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
 
 
 //  checks if someone is a chef
-//write logic to check if a person is logged in or not. 
-// router.post("/users", authUser, async (req, res, next) => {
-//   const { isUser } = req.body;
-//   if (!isChef) {
-//     res.send({ message: "Not authorized, please login or register" });
-//   }
-//   try {
-//     const user = await User.create(req.body);
-//     res.send(user);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+// write logic to check if a person is logged in or not. 
+router.post("/users", authUser, async (req, res, next) => {
+  const { isUser } = req.body;
+  if (!isChef) {
+    res.send({ message: "Not authorized, please login or register" });
+  }
+  try {
+    const user = await User.create(req.body);
+    res.send(user);
+  } catch (error) {
+    next(error);
+  }
+});
 
 
 
