@@ -31612,23 +31612,48 @@ var Login = function Login(_ref) {
     _useState4 = _slicedToArray(_useState3, 2),
     password = _useState4[0],
     setPassword = _useState4[1];
-  function handleLogin(_x2) {
-    return _handleLogin.apply(this, arguments);
+  function fetchUserProfile() {
+    return _fetchUserProfile.apply(this, arguments);
   }
-  function _handleLogin() {
-    _handleLogin = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(ev) {
+  function _fetchUserProfile() {
+    _fetchUserProfile = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var beyonce;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
+            beyonce = {
+              username: "Beyonce",
+              password: "abc123"
+            };
+            _context.prev = 1;
+            _context.next = 4;
+            return fetch("".concat(_api.default, "/login"), {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(beyonce)
+            });
+          case 4:
+            console.log(beyonce);
+            // setItem(initialItem);
+
+            // setIsAddingItem(false);
+
+            // fetchItems();
+            _context.next = 10;
+            break;
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](1);
+            console.log('Error: ', _context.t0);
+          case 10:
           case "end":
             return _context.stop();
         }
-      }, _callee);
+      }, _callee, null, [[1, 7]]);
     }));
-    return _handleLogin.apply(this, arguments);
-  }
-  function refreshPage() {
-    window.location.reload(false);
+    return _fetchUserProfile.apply(this, arguments);
   }
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", {
     class: "title"
@@ -31637,7 +31662,8 @@ var Login = function Login(_ref) {
     controlId: "formBasicPassword"
   }, /*#__PURE__*/_react.default.createElement(_Form.default.Label, null), /*#__PURE__*/_react.default.createElement(_Form.default.Control, {
     onChange: function onChange(e) {
-      return setUserName(e.target.value);
+      setUserName(e.target.value);
+      console.log(user_name);
     },
     value: user_name,
     type: "text",
@@ -31654,8 +31680,9 @@ var Login = function Login(_ref) {
   }, /*#__PURE__*/_react.default.createElement(_Button.default, {
     variant: "primary",
     type: "submit",
-    onClick: function onClick(ev) {
-      return handleLogin(ev);
+    onClick: function onClick() {
+      setIsHome(false);
+      fetchUserProfile();
     }
   }, "Login"), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement(_Button.default, {
     variant: "danger",
@@ -31887,7 +31914,26 @@ var App = function App() {
     setIsRegistered = _useState20[1];
   function fetchUsers() {
     return _fetchUsers.apply(this, arguments);
-  }
+  } // async function fetchUserProfile() {
+  //     let beyonce = {
+  //       username  : "Beyonce",
+  //       password : "abc123"
+  //     }
+  //     try {
+  //       await fetch(`${apiURL}/login`, {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           },
+  //         body: JSON.stringify(beyonce),
+  //       });
+  //       console.log(beyonce);
+  //       // setItem(initialItem);
+  //       // setIsAddingItem(false);
+  //       // fetchItems();
+  //     } catch (err) {
+  //       console.log('Error: ', err);
+  //     }
   function _fetchUsers() {
     _fetchUsers = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var response, usersData;
@@ -32103,7 +32149,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64312" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50391" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -35,6 +35,43 @@ export const App = () => {
     }
   }
 
+  // async function fetchUserProfile() {
+  //     let beyonce = {
+  //       username  : "Beyonce",
+  //       password : "abc123"
+  //     }
+  //     try {
+  
+  //       await fetch(`${apiURL}/login`, {
+  
+  //         method: 'POST',
+  
+  //         headers: {
+  
+  //           'Content-Type': 'application/json',
+  
+  //           },
+  
+  //         body: JSON.stringify(beyonce),
+  
+  //       });
+  //       console.log(beyonce);
+  //       // setItem(initialItem);
+  
+  //       // setIsAddingItem(false);
+  
+  //       // fetchItems();
+  
+  //     } catch (err) {
+  
+  //       console.log('Error: ', err);
+  
+  //     }
+  
+    
+  
+       
+
   async function fetchRecipes() {
     try {
       const response = await fetch(`${apiURL}/recipes`);
@@ -112,4 +149,4 @@ export const App = () => {
       )}
     </main>
   );
-};
+}

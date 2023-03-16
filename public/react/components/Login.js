@@ -11,14 +11,39 @@ export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  async function handleLogin(ev) {
- //add logic here
- //see users.js in routes for details
-// needs to route to UserProfile component once someone clicks the login button.
-    
-  }
-  function refreshPage() {
-    window.location.reload(false);
+  async function fetchUserProfile() {
+    let beyonce = {
+      username  : "Beyonce",
+      password : "abc123"
+    }
+    try {
+
+      await fetch(`${apiURL}/login`, {
+
+        method: 'POST',
+
+        headers: {
+
+          'Content-Type': 'application/json',
+
+          },
+
+        body: JSON.stringify(beyonce),
+
+      });
+      console.log(beyonce);
+      // setItem(initialItem);
+
+      // setIsAddingItem(false);
+
+      // fetchItems();
+
+    } catch (err) {
+
+      console.log('Error: ', err);
+
+    }
+
   }
 
   return (
@@ -28,10 +53,15 @@ export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label></Form.Label>
           <Form.Control
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) =>  {
+                setUserName(e.target.value)
+                console.log(user_name)
+              }
+            }
             value={user_name}
             type="text"
             placeholder="Username"
+          
           />
           <br></br>
           <Form.Control
@@ -45,7 +75,12 @@ export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
         <Button
           variant="primary"
           type="submit"
-          onClick={(ev) => handleLogin(ev)}
+          onClick={()=> 
+          {
+            setIsHome(false)
+            fetchUserProfile() 
+            
+          }}
         >
           Login
         </Button>
