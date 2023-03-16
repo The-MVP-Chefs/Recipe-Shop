@@ -12,14 +12,14 @@ export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
   const [password, setPassword] = useState("");
 
   async function fetchUserProfile() {
-    let beyonce = {
-      username  : "Beyonce",
-      password : "abc123"
+    console.log('In fetch user profile');
+    let newUser = {
+      user_name  : user_name,
+      password : password
     }
     try {
 
-      await fetch(`${apiURL}/login`, {
-
+      await fetch(`${apiURL}/users/login`, {
         method: 'POST',
 
         headers: {
@@ -28,10 +28,10 @@ export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
 
           },
 
-        body: JSON.stringify(beyonce),
+        body: JSON.stringify(newUser),
 
       });
-      console.log(beyonce);
+      console.log(newUser);
       // setItem(initialItem);
 
       // setIsAddingItem(false);
@@ -78,6 +78,7 @@ export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
           onClick={()=> 
           {
             setIsHome(false)
+            setIsLoggedIn(false)
             fetchUserProfile() 
             
           }}
