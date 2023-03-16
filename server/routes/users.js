@@ -5,7 +5,7 @@ const router = express();
 const { seed } = require("../seed");
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
- const jwt = require("jsonwebtoken");
+ //const jwt = require("jsonwebtoken");
 router.use(express.json());
 router.use(express.urlencoded({ extended:true}));
 
