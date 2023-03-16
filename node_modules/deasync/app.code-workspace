@@ -5,6 +5,6 @@
     }
   ],
   "settings": {
-    "cSpell.words": ["loongarch"]
+    "cSpell.words": ["ldflags", "libstdc", "loongarch"]
   }
 }

@@ -76,7 +76,7 @@ export const App = () => {
 // left is prop right is function}
         <Home setIsHome={setIsHome} setRecipes={setRecipes} setIsLoggedIn={setIsLoggedIn}  setSingleViewUser={setSingleViewUser} setIsRegistered={setIsRegistered} />
       ) : isLoggedIn ? (
-        <Login setIsLoggedIn={setIsLoggedIn} setIsHome={setIsHome} />
+        <Login setIsLoggedIn={setIsLoggedIn} setIsHome={setIsHome} setSingleViewUser={setSingleViewUser}/>
       ) : singleViewUser ? (
         <SingleViewUser
           props={singleViewUser}
@@ -97,6 +97,7 @@ export const App = () => {
         <SingleViewRecipe
           props={singleViewRecipe}
           setSingleViewRecipe={setSingleViewRecipe}
+          setIsUpdating={setIsUpdating}
           handleClick={fetchSingleRecipe}
         />
       ) : (
