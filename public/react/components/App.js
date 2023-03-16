@@ -104,7 +104,8 @@ export const App = () => {
     }
   }
 
-
+  console.log("isHome:", isHome);
+  console.log("isLoggedIn:", isLoggedIn);
 
   return (
     <main>

@@ -31617,41 +31617,42 @@ var Login = function Login(_ref) {
   }
   function _fetchUserProfile() {
     _fetchUserProfile = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var beyonce;
+      var newUser;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            beyonce = {
-              username: "Beyonce",
-              password: "abc123"
+            console.log('In fetch user profile');
+            newUser = {
+              user_name: user_name,
+              password: password
             };
-            _context.prev = 1;
-            _context.next = 4;
-            return fetch("".concat(_api.default, "/login"), {
+            _context.prev = 2;
+            _context.next = 5;
+            return fetch("".concat(_api.default, "/users/login"), {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: JSON.stringify(beyonce)
+              body: JSON.stringify(newUser)
             });
-          case 4:
-            console.log(beyonce);
+          case 5:
+            console.log(newUser);
             // setItem(initialItem);
 
             // setIsAddingItem(false);
 
             // fetchItems();
-            _context.next = 10;
+            _context.next = 11;
             break;
-          case 7:
-            _context.prev = 7;
-            _context.t0 = _context["catch"](1);
+          case 8:
+            _context.prev = 8;
+            _context.t0 = _context["catch"](2);
             console.log('Error: ', _context.t0);
-          case 10:
+          case 11:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[1, 7]]);
+      }, _callee, null, [[2, 8]]);
     }));
     return _fetchUserProfile.apply(this, arguments);
   }
@@ -31682,6 +31683,7 @@ var Login = function Login(_ref) {
     type: "submit",
     onClick: function onClick() {
       setIsHome(false);
+      setIsLoggedIn(false);
       fetchUserProfile();
     }
   }, "Login"), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement(_Button.default, {
@@ -32063,6 +32065,8 @@ var App = function App() {
     }));
     return _fetchSingleUser.apply(this, arguments);
   }
+  console.log("isHome:", isHome);
+  console.log("isLoggedIn:", isLoggedIn);
   return /*#__PURE__*/_react.default.createElement("main", null, isHome ?
   /*#__PURE__*/
   // left is prop right is function}
@@ -32149,7 +32153,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50391" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60610" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
