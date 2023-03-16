@@ -39,6 +39,9 @@ you need to install the following packages:
 - `npm install sequelize`
 - `npm install bcrypt`
 
+Then you need to populate the backend with data:
+- `npm run seed`
+
 After installing these packages, you can start the server by running the following command:
 
 - `npm start -dev`
