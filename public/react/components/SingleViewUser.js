@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from "./User";
+//import { User } from "./User";
 import apiURL from "../api";
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";

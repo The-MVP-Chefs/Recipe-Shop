@@ -95,6 +95,13 @@ router.post("/login", async (req, res, next) => {
       const { id } = loginUser;
       //take id and pass it in to get that one users info 
       // res.send({ message: "Successful Login"});
+      // let usersData = await User.findOne({
+      //   where: {
+      //     id: loginUser
+      //   }
+      // });
+      // res.send(usersData);
+
     } else {
       res.send("Please enter the correct password and try again.");
     }

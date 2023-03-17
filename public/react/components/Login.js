@@ -33,7 +33,7 @@ export const Login = ({props,users, setIsLoggedIn, setIsHome ,setSingleViewUser 
 
       });
      
-      //console.log(newUser);
+      
     } catch (err) {
       console.log('Error: ', err);
     }
@@ -74,11 +74,12 @@ export const Login = ({props,users, setIsLoggedIn, setIsHome ,setSingleViewUser 
             // setIsHome(false)
             setIsLoggedIn(false)
             fetchUserProfile() ;
-            //Trying to get this to go to either the user component or the Single view compoonent to reflect the 
-           // users profile. Right now it will go to the component but will not return anytjing because it says 
-           //"cant read properties of undefied"
+            //Trying to get this to go the SingleViewUser compoonent to reflect the users profile data.
+        // Right now it will go to the component but will not return anything because it says 
+           //"cant read properties of undefied". Not sure how to extract the id and get the next component to rend it correctly
             setSingleViewUser(true);
-            //<User users={users} />
+            
+           
             
           }}
         >
