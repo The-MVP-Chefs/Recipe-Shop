@@ -26538,9 +26538,10 @@ exports.User = void 0;
 var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var User = function User(props) {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h3", null, props.user.name), /*#__PURE__*/_react.default.createElement("img", {
+  console.log("WORKING!");
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "Login Successful! Welcome Back ", props.user.user_name), /*#__PURE__*/_react.default.createElement("h3", null, props.user.user_name), /*#__PURE__*/_react.default.createElement("img", {
     src: props.user.user_image,
-    alt: props.user.name
+    alt: props.user.user_name
   }));
 };
 exports.User = User;
@@ -31583,6 +31584,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.Login = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _api = _interopRequireDefault(require("../api"));
+var _User = require("./User");
 require("bootstrap/dist/css/bootstrap.min.css");
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
@@ -31600,7 +31602,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Login = function Login(_ref) {
-  var setIsLoggedIn = _ref.setIsLoggedIn,
+  var props = _ref.props,
+    users = _ref.users,
+    setIsLoggedIn = _ref.setIsLoggedIn,
     setIsHome = _ref.setIsHome,
     setSingleViewUser = _ref.setSingleViewUser;
   //make the form
@@ -31621,13 +31625,13 @@ var Login = function Login(_ref) {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            console.log('In fetch user profile');
+            //console.log('In fetch user profile');
             newUser = {
               user_name: user_name,
               password: password
             };
-            _context.prev = 2;
-            _context.next = 5;
+            _context.prev = 1;
+            _context.next = 4;
             return fetch("".concat(_api.default, "/users/login"), {
               method: 'POST',
               headers: {
@@ -31635,24 +31639,18 @@ var Login = function Login(_ref) {
               },
               body: JSON.stringify(newUser)
             });
-          case 5:
-            console.log(newUser);
-            // setItem(initialItem);
-
-            // setIsAddingItem(false);
-
-            // fetchItems();
-            _context.next = 11;
+          case 4:
+            _context.next = 9;
             break;
-          case 8:
-            _context.prev = 8;
-            _context.t0 = _context["catch"](2);
+          case 6:
+            _context.prev = 6;
+            _context.t0 = _context["catch"](1);
             console.log('Error: ', _context.t0);
-          case 11:
+          case 9:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[2, 8]]);
+      }, _callee, null, [[1, 6]]);
     }));
     return _fetchUserProfile.apply(this, arguments);
   }
@@ -31664,8 +31662,9 @@ var Login = function Login(_ref) {
   }, /*#__PURE__*/_react.default.createElement(_Form.default.Label, null), /*#__PURE__*/_react.default.createElement(_Form.default.Control, {
     onChange: function onChange(e) {
       setUserName(e.target.value);
-      console.log(user_name);
+      //console.log(user_name)
     },
+
     value: user_name,
     type: "text",
     placeholder: "Username"
@@ -31682,9 +31681,14 @@ var Login = function Login(_ref) {
     variant: "primary",
     type: "submit",
     onClick: function onClick() {
-      setIsHome(false);
+      // setIsHome(false)
       setIsLoggedIn(false);
       fetchUserProfile();
+      //Trying to get this to go to either the user component or the Single view compoonent to reflect the 
+      // users profile. Right now it will go to the component but will not return anytjing because it says 
+      //"cant read properties of undefied"
+      setSingleViewUser(true);
+      //<User users={users} />
     }
   }, "Login"), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement(_Button.default, {
     variant: "danger",
@@ -31695,7 +31699,7 @@ var Login = function Login(_ref) {
   }, "Cancel"))));
 };
 exports.Login = Login;
-},{"react":"../node_modules/react/index.js","../api":"react/api.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js"}],"react/components/Register.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../api":"react/api.js","./User":"react/components/User.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js"}],"react/components/Register.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31841,7 +31845,29 @@ var Register = function Register(_ref) {
   }, "Cancel"))));
 };
 exports.Register = Register;
-},{"react":"../node_modules/react/index.js","../api":"react/api.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js"}],"react/components/App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../api":"react/api.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js"}],"react/components/SingleViewUser.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SingleUserView = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _User = require("./User");
+var _api = _interopRequireDefault(require("../api"));
+require("bootstrap/dist/css/bootstrap.min.css");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+//bootstrap
+
+//this should show the users info right now its saysing undefined.
+var SingleUserView = function SingleUserView(props) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "Login Successful! Welcome Back ", props.user.user_name), /*#__PURE__*/_react.default.createElement("h3", null, props.user.user_name), /*#__PURE__*/_react.default.createElement("img", {
+    src: props.user.user_image,
+    alt: props.user.user_name
+  }));
+};
+exports.SingleUserView = SingleUserView;
+},{"react":"../node_modules/react/index.js","./User":"react/components/User.js","../api":"react/api.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css"}],"react/components/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31857,6 +31883,7 @@ var _AddRecipe = require("./AddRecipe");
 var _Home = require("./Home");
 var _Login = require("./Login");
 var _Register = require("./Register");
+var _SingleViewUser = require("./SingleViewUser");
 require("bootstrap/dist/css/bootstrap.min.css");
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _api = _interopRequireDefault(require("../api"));
@@ -31898,44 +31925,22 @@ var App = function App() {
     _useState12 = _slicedToArray(_useState11, 2),
     isAddingRecipe = _useState12[0],
     setIsAddingRecipe = _useState12[1];
+  //const [isDeleted, setIsDeleted] = useState(false);
   var _useState13 = (0, _react.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    isDeleted = _useState14[0],
-    setIsDeleted = _useState14[1];
+    isUpdating = _useState14[0],
+    setIsUpdating = _useState14[1];
   var _useState15 = (0, _react.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    isUpdating = _useState16[0],
-    setIsUpdating = _useState16[1];
+    isLoggedIn = _useState16[0],
+    setIsLoggedIn = _useState16[1];
   var _useState17 = (0, _react.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    isLoggedIn = _useState18[0],
-    setIsLoggedIn = _useState18[1];
-  var _useState19 = (0, _react.useState)(false),
-    _useState20 = _slicedToArray(_useState19, 2),
-    isRegistered = _useState20[0],
-    setIsRegistered = _useState20[1];
+    isRegistered = _useState18[0],
+    setIsRegistered = _useState18[1];
   function fetchUsers() {
     return _fetchUsers.apply(this, arguments);
-  } // async function fetchUserProfile() {
-  //     let beyonce = {
-  //       username  : "Beyonce",
-  //       password : "abc123"
-  //     }
-  //     try {
-  //       await fetch(`${apiURL}/login`, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           },
-  //         body: JSON.stringify(beyonce),
-  //       });
-  //       console.log(beyonce);
-  //       // setItem(initialItem);
-  //       // setIsAddingItem(false);
-  //       // fetchItems();
-  //     } catch (err) {
-  //       console.log('Error: ', err);
-  //     }
+  }
   function _fetchUsers() {
     _fetchUsers = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var response, usersData;
@@ -32065,8 +32070,6 @@ var App = function App() {
     }));
     return _fetchSingleUser.apply(this, arguments);
   }
-  console.log("isHome:", isHome);
-  console.log("isLoggedIn:", isLoggedIn);
   return /*#__PURE__*/_react.default.createElement("main", null, isHome ?
   /*#__PURE__*/
   // left is prop right is function}
@@ -32077,13 +32080,15 @@ var App = function App() {
     setSingleViewUser: setSingleViewUser,
     setIsRegistered: setIsRegistered
   }) : isLoggedIn ? /*#__PURE__*/_react.default.createElement(_Login.Login, {
+    users: users,
     setIsLoggedIn: setIsLoggedIn,
     setIsHome: setIsHome,
     setSingleViewUser: setSingleViewUser
-  }) : singleViewUser ? /*#__PURE__*/_react.default.createElement(SingleViewUser, {
-    props: singleViewUser,
-    setSingleViewUser: setSingleViewUser,
-    handleClick: fetchSingleUser
+  }) : singleViewUser ? /*#__PURE__*/_react.default.createElement(_SingleViewUser.SingleUserView, {
+    users: users,
+    singleViewUser: singleViewUser,
+    setSingleViewUser: setSingleViewUser
+    //handleClick={fetchSingleUser}
   }) : isRegistered ? /*#__PURE__*/_react.default.createElement(_Register.Register, {
     setIsRegistered: setIsRegistered,
     setIsHome: setIsHome
@@ -32109,7 +32114,7 @@ var App = function App() {
   })));
 };
 exports.App = App;
-},{"react":"../node_modules/react/index.js","./UsersList":"react/components/UsersList.js","./RecipesList":"react/components/RecipesList.js","./SingleViewRecipe":"react/components/SingleViewRecipe.js","./UpdateRecipe":"react/components/UpdateRecipe.js","./AddRecipe":"react/components/AddRecipe.js","./Home":"react/components/Home.js","./Login":"react/components/Login.js","./Register":"react/components/Register.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","../api":"react/api.js"}],"../node_modules/bootstrap/dist/css/bootstrap.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./UsersList":"react/components/UsersList.js","./RecipesList":"react/components/RecipesList.js","./SingleViewRecipe":"react/components/SingleViewRecipe.js","./UpdateRecipe":"react/components/UpdateRecipe.js","./AddRecipe":"react/components/AddRecipe.js","./Home":"react/components/Home.js","./Login":"react/components/Login.js","./Register":"react/components/Register.js","./SingleViewUser":"react/components/SingleViewUser.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","../api":"react/api.js"}],"../node_modules/bootstrap/dist/css/bootstrap.css":[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
@@ -32153,7 +32158,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60610" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53098" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

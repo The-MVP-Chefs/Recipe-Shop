@@ -7,10 +7,12 @@ import { AddRecipe } from "./AddRecipe";
 import{Home} from "./Home";
 import{Login} from "./Login";
 import{Register} from "./Register";
+import { SingleUserView } from "./SingleViewUser";
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import apiURL from "../api";
+
 
 export const App = () => {
   const [users, setUsers] = useState([]);
@@ -19,7 +21,7 @@ export const App = () => {
   const [singleViewRecipe, setSingleViewRecipe] = useState(null);
   const [singleViewUser, setSingleViewUser] = useState(null);
   const [isAddingRecipe, setIsAddingRecipe] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
+  //const [isDeleted, setIsDeleted] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
@@ -35,42 +37,7 @@ export const App = () => {
     }
   }
 
-  // async function fetchUserProfile() {
-  //     let beyonce = {
-  //       username  : "Beyonce",
-  //       password : "abc123"
-  //     }
-  //     try {
   
-  //       await fetch(`${apiURL}/login`, {
-  
-  //         method: 'POST',
-  
-  //         headers: {
-  
-  //           'Content-Type': 'application/json',
-  
-  //           },
-  
-  //         body: JSON.stringify(beyonce),
-  
-  //       });
-  //       console.log(beyonce);
-  //       // setItem(initialItem);
-  
-  //       // setIsAddingItem(false);
-  
-  //       // fetchItems();
-  
-  //     } catch (err) {
-  
-  //       console.log('Error: ', err);
-  
-  //     }
-  
-    
-  
-       
 
   async function fetchRecipes() {
     try {
@@ -104,9 +71,7 @@ export const App = () => {
     }
   }
 
-  console.log("isHome:", isHome);
-  console.log("isLoggedIn:", isLoggedIn);
-
+  
   return (
     <main>
       
@@ -114,12 +79,13 @@ export const App = () => {
 // left is prop right is function}
         <Home setIsHome={setIsHome} setRecipes={setRecipes} setIsLoggedIn={setIsLoggedIn}  setSingleViewUser={setSingleViewUser} setIsRegistered={setIsRegistered} />
       ) : isLoggedIn ? (
-        <Login setIsLoggedIn={setIsLoggedIn} setIsHome={setIsHome} setSingleViewUser={setSingleViewUser}/>
+        <Login users={users}setIsLoggedIn={setIsLoggedIn} setIsHome={setIsHome} setSingleViewUser={setSingleViewUser}/>
       ) : singleViewUser ? (
-        <SingleViewUser
-          props={singleViewUser}
+        <SingleUserView 
+           users={users}
+          singleViewUser={singleViewUser}
           setSingleViewUser={setSingleViewUser}
-          handleClick={fetchSingleUser}
+          //handleClick={fetchSingleUser}
         />): isRegistered ? (
         <Register setIsRegistered={setIsRegistered} setIsHome={setIsHome} />
       ) : isUpdating ? (

@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import apiURL from "../api";
+import { User } from "./User";
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
+export const Login = ({props,users, setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
  
   //make the form
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   async function fetchUserProfile() {
-    console.log('In fetch user profile');
+    //console.log('In fetch user profile');
     let newUser = {
       user_name  : user_name,
       password : password
@@ -31,17 +32,10 @@ export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
         body: JSON.stringify(newUser),
 
       });
-      console.log(newUser);
-      // setItem(initialItem);
-
-      // setIsAddingItem(false);
-
-      // fetchItems();
-
+     
+      //console.log(newUser);
     } catch (err) {
-
       console.log('Error: ', err);
-
     }
 
   }
@@ -55,7 +49,7 @@ export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
           <Form.Control
             onChange={(e) =>  {
                 setUserName(e.target.value)
-                console.log(user_name)
+                //console.log(user_name)
               }
             }
             value={user_name}
@@ -77,9 +71,14 @@ export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
           type="submit"
           onClick={()=> 
           {
-            setIsHome(false)
+            // setIsHome(false)
             setIsLoggedIn(false)
-            fetchUserProfile() 
+            fetchUserProfile() ;
+            //Trying to get this to go to either the user component or the Single view compoonent to reflect the 
+           // users profile. Right now it will go to the component but will not return anytjing because it says 
+           //"cant read properties of undefied"
+            setSingleViewUser(true);
+            //<User users={users} />
             
           }}
         >
