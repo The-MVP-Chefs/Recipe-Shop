@@ -4,7 +4,7 @@ import { Recipe } from "./Recipe";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 
-export const RecipesList = ({
+export const UserRecipesList = ({
   recipes,
   handleClick,
   setIsAddingRecipe,
@@ -29,7 +29,9 @@ export const RecipesList = ({
       </span>
 
       {recipes.map((recipe, idx) => {
-        return <Recipe recipe={recipe} key={idx} handleClick={handleClick} />;
+        return (
+          <UserRecipe recipe={recipe} key={idx} handleClick={handleClick} />
+        );
       })}
     </>
   );

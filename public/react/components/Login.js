@@ -47,7 +47,6 @@ export const Login = ({
           <Form.Control
             onChange={(e) => {
               setUserName(e.target.value);
-              //console.log(user_name)
             }}
             value={user_name}
             type="text"
@@ -66,9 +65,9 @@ export const Login = ({
             variant="primary"
             type="submit"
             onClick={() => {
-              setIsLoggedIn(false);
-              setUserView(true);
               fetchUserProfile();
+              setUserView(true);
+              setIsLoggedIn(false);
             }}
           >
             Login

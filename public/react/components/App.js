@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
+import apiURL from "../api";
 import { RecipesList } from "./RecipesList";
 import { SingleViewRecipe } from "./SingleViewRecipe";
-import { UpdateRecipe } from "./UpdateRecipe";
-import { AddRecipe } from "./AddRecipe";
 import { Home } from "./Home";
 import { Login } from "./Login";
 import { Register } from "./Register";
-import { UserView } from "./UserView";
 import { LoginPrompt } from "./LoginPrompt";
-import apiURL from "../api";
+//user specific componments
+import { UserView } from "./UserView";
+import { UserHome } from "./UserHome";
+import { UserAddRecipe } from "./UserAddRecipe";
+import { UserUpdateRecipe } from "./UserUpdateRecipe";
+// import { UserRecipesList } from "./UserRecipeList";
+// import { UserRecipe } from "./UserRecipe";
+import { UserSingleViewRecipe } from "./UserSingleviewRecipe";
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
-//import Button from "react-bootstrap/Button";
 
 export const App = () => {
   const [users, setUsers] = useState([]);
@@ -23,7 +27,12 @@ export const App = () => {
   const [isUpdating, setIsUpdating] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
+  //pieces of state exclusive to users
   const [userView, setUserView] = useState(false);
+  const [userHome, setUserHome] = useState(false);
+  const [userSingleViewRecipe, setUserSingleViewRecipe] = useState(null);
+  const [userAddingRecipe, setUserAddingRecipe] = useState(false);
+  const [userUpdating, setUserUpdating] = useState(false);
 
   async function fetchUsers() {
     try {
@@ -77,14 +86,22 @@ export const App = () => {
           setIsLoggedIn={setIsLoggedIn}
           setIsRegistered={setIsRegistered}
         />
+      ) : userHome ? (
+        // left is prop right is function}
+        <UserHome setUserHome={setUserHome} setRecipes={setRecipes} />
       ) : isLoggedIn ? (
         <Login
           users={users}
+          setRecipes={setRecipes}
           setIsLoggedIn={setIsLoggedIn}
           setIsHome={setIsHome}
+          setUserView={setUserView}
         />
       ) : loginPrompt ? (
         <LoginPrompt
+          setRecipes={setRecipes}
+          recipes={recipes}
+          handleClick={fetchSingleRecipe}
           setIsLoggedIn={setIsLoggedIn}
           setLoginPrompt={setLoginPrompt}
           setIsRegistered={setIsRegistered}
@@ -93,7 +110,11 @@ export const App = () => {
           setUserView={setUserView}
         />
       ) : isRegistered ? (
-        <Register setIsRegistered={setIsRegistered} setIsHome={setIsHome} />
+        <Register
+          setIsRegistered={setIsRegistered}
+          setIsHome={setIsHome}
+          setUserView={setUserView}
+        />
       ) : isUpdating ? (
         <LoginPrompt
           setIsLoggedIn={setIsLoggedIn}
@@ -102,6 +123,11 @@ export const App = () => {
           setIsHome={setIsHome}
           setSingleViewRecipe={setSingleViewRecipe}
           setUserView={setUserView}
+        />
+      ) : userUpdating ? (
+        <UserUpdateRecipe
+          setUserHome={setUserHome}
+          setUserSingleViewRecipe={setUserSingleViewRecipe}
         />
       ) : isAddingRecipe ? (
         <LoginPrompt
@@ -112,11 +138,29 @@ export const App = () => {
           setSingleViewRecipe={setSingleViewRecipe}
           setUserView={setUserView}
         />
+      ) : userAddingRecipe ? (
+        <UserAddRecipe
+          setIsLoggedIn={setIsLoggedIn}
+          setLoginPrompt={setLoginPrompt}
+          setIsRegistered={setIsRegistered}
+          setIsHome={setIsHome}
+          setSingleViewRecipe={setSingleViewRecipe}
+          setUserView={setUserView}
+        />
+      ) : userView ? (
+        <UserView setUserHome={setUserHome} setUserView={setUserView} />
       ) : singleViewRecipe ? (
         <SingleViewRecipe
           props={singleViewRecipe}
           setSingleViewRecipe={setSingleViewRecipe}
           setIsUpdating={setIsUpdating}
+          handleClick={fetchSingleRecipe}
+          setLoginPrompt={setLoginPrompt}
+        />
+      ) : userSingleViewRecipe ? (
+        <UserSingleViewRecipe
+          props={userSingleViewRecipe}
+          setUserUpdating={setUserSingleViewRecipe}
           handleClick={fetchSingleRecipe}
           setLoginPrompt={setLoginPrompt}
         />
