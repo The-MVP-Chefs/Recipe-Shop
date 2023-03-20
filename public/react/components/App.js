@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { UsersList } from "./UsersList";
 import { RecipesList } from "./RecipesList";
 import { SingleViewRecipe } from "./SingleViewRecipe";
 import { UpdateRecipe } from "./UpdateRecipe";
 import { AddRecipe } from "./AddRecipe";
-import{Home} from "./Home";
-import{Login} from "./Login";
-import{Register} from "./Register";
-import { SingleUserView } from "./SingleViewUser";
+import { Home } from "./Home";
+import { Login } from "./Login";
+import { Register } from "./Register";
+import { UserView } from "./UserView";
+import { LoginPrompt } from "./LoginPrompt";
+import apiURL from "../api";
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
-import Button from "react-bootstrap/Button";
-import apiURL from "../api";
-
+//import Button from "react-bootstrap/Button";
 
 export const App = () => {
   const [users, setUsers] = useState([]);
   const [isHome, setIsHome] = useState(true);
   const [recipes, setRecipes] = useState([]);
   const [singleViewRecipe, setSingleViewRecipe] = useState(null);
-  const [singleViewUser, setSingleViewUser] = useState(null);
   const [isAddingRecipe, setIsAddingRecipe] = useState(false);
-  //const [isDeleted, setIsDeleted] = useState(false);
+  const [loginPrompt, setLoginPrompt] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
+  const [userView, setUserView] = useState(false);
 
   async function fetchUsers() {
     try {
@@ -36,8 +35,6 @@ export const App = () => {
       console.log("Oh no an error! ", err);
     }
   }
-
-  
 
   async function fetchRecipes() {
     try {
@@ -60,7 +57,6 @@ export const App = () => {
     }
   }
 
-
   async function fetchSingleUser(id) {
     try {
       const response = await fetch(`${apiURL}/users/${id}`);
@@ -71,38 +67,58 @@ export const App = () => {
     }
   }
 
-  
   return (
     <main>
-      
       {isHome ? (
-// left is prop right is function}
-        <Home setIsHome={setIsHome} setRecipes={setRecipes} setIsLoggedIn={setIsLoggedIn}  setSingleViewUser={setSingleViewUser} setIsRegistered={setIsRegistered} />
+        // left is prop right is function}
+        <Home
+          setIsHome={setIsHome}
+          setRecipes={setRecipes}
+          setIsLoggedIn={setIsLoggedIn}
+          setIsRegistered={setIsRegistered}
+        />
       ) : isLoggedIn ? (
-        <Login users={users}setIsLoggedIn={setIsLoggedIn} setIsHome={setIsHome} setSingleViewUser={setSingleViewUser}/>
-      ) : singleViewUser ? (
-        <SingleUserView 
-           users={users}
-          singleViewUser={singleViewUser}
-          setSingleViewUser={setSingleViewUser}
-          //handleClick={fetchSingleUser}
-        />): isRegistered ? (
+        <Login
+          users={users}
+          setIsLoggedIn={setIsLoggedIn}
+          setIsHome={setIsHome}
+        />
+      ) : loginPrompt ? (
+        <LoginPrompt
+          setIsLoggedIn={setIsLoggedIn}
+          setLoginPrompt={setLoginPrompt}
+          setIsRegistered={setIsRegistered}
+          setIsHome={setIsHome}
+          setSingleViewRecipe={setSingleViewRecipe}
+          setUserView={setUserView}
+        />
+      ) : isRegistered ? (
         <Register setIsRegistered={setIsRegistered} setIsHome={setIsHome} />
       ) : isUpdating ? (
-        <UpdateRecipe
-          props={singleViewRecipe}
-          setIsUpdating={setIsUpdating}
-          isUpdating={isUpdating}
+        <LoginPrompt
+          setIsLoggedIn={setIsLoggedIn}
+          setLoginPrompt={setLoginPrompt}
+          setIsRegistered={setIsRegistered}
+          setIsHome={setIsHome}
           setSingleViewRecipe={setSingleViewRecipe}
+          setUserView={setUserView}
         />
       ) : isAddingRecipe ? (
-        <AddRecipe setIsAddingRecipe={setIsAddingRecipe} />
+        <LoginPrompt
+          setIsLoggedIn={setIsLoggedIn}
+          setLoginPrompt={setLoginPrompt}
+          setIsRegistered={setIsRegistered}
+          setIsHome={setIsHome}
+          setSingleViewRecipe={setSingleViewRecipe}
+          setUserView={setUserView}
+        />
       ) : singleViewRecipe ? (
         <SingleViewRecipe
           props={singleViewRecipe}
           setSingleViewRecipe={setSingleViewRecipe}
           setIsUpdating={setIsUpdating}
           handleClick={fetchSingleRecipe}
+          setLoginPrompt={setLoginPrompt}
         />
       ) : (
         <div id="recipes">
@@ -116,4 +132,60 @@ export const App = () => {
       )}
     </main>
   );
-}
+};
+
+//   return (
+//     <main>
+//       {isHome ? (
+//         // left is prop right is function}
+//         <Home
+//           setIsHome={setIsHome}
+//           setRecipes={setRecipes}
+//           setIsLoggedIn={setIsLoggedIn}
+//           setIsRegistered={setIsRegistered}
+//         />
+//       ) : isLoggedIn ? (
+//         <Login
+//           users={users}
+//           setIsLoggedIn={setIsLoggedIn}
+//           setIsHome={setIsHome}
+//         />
+//       ) : loginPrompt ? (
+//         <LoginPrompt
+//           setIsLoggedIn={setIsLoggedIn}
+//           setLoginPrompt={setLoginPrompt}
+//           setIsRegistered={setIsRegistered}
+//           setIsHome={setIsHome}
+//           setSingleViewRecipe={setSingleViewRecipe}
+//         />
+//       ) : isRegistered ? (
+//         <Register setIsRegistered={setIsRegistered} setIsHome={setIsHome} />
+//       ) : isUpdating ? (
+//         <UpdateRecipe
+//           props={singleViewRecipe}
+//           setIsUpdating={setIsUpdating}
+//           isUpdating={isUpdating}
+//           setSingleViewRecipe={setSingleViewRecipe}
+//         />
+//       ) : isAddingRecipe ? (
+//         <AddRecipe setIsAddingRecipe={setIsAddingRecipe} />
+//       ) : singleViewRecipe ? (
+//         <SingleViewRecipe
+//           props={singleViewRecipe}
+//           setSingleViewRecipe={setSingleViewRecipe}
+//           setIsUpdating={setIsUpdating}
+//           handleClick={fetchSingleRecipe}
+//         />
+//       ) : (
+//         <div id="recipes">
+//           <RecipesList
+//             recipes={recipes}
+//             handleClick={fetchSingleRecipe}
+//             setIsAddingRecipe={setIsAddingRecipe}
+//             setIsHome={setIsHome}
+//           />
+//         </div>
+//       )}
+//     </main>
+//   );
+// };

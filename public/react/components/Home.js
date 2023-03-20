@@ -39,12 +39,12 @@ export const Home = ({ setIsHome, setRecipes,setIsLoggedIn, setIsRegistered }) =
         type="submit"
         onClick={(ev)=> handleViewAll(ev) }
       >
-        View Public Recipes
+        View All Recipes
       </Button>
       <br></br>
       <br></br>
       <Button
-        variant="primary"
+        variant="primary"s
         type="submit"
         onClick={() =>  {
           setIsLoggedIn(true)

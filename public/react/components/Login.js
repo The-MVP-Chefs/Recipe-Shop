@@ -6,8 +6,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export const Login = ({props,users, setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
- 
+export const Login = ({
+  props,
+  users,
+  setIsLoggedIn,
+  setIsHome,
+  setUserView,
+}) => {
   //make the form
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -15,29 +20,22 @@ export const Login = ({props,users, setIsLoggedIn, setIsHome ,setSingleViewUser 
   async function fetchUserProfile() {
     //console.log('In fetch user profile');
     let newUser = {
-      user_name  : user_name,
-      password : password
-    }
+      user_name: user_name,
+      password: password,
+    };
     try {
-
       await fetch(`${apiURL}/users/login`, {
-        method: 'POST',
+        method: "POST",
 
         headers: {
-
-          'Content-Type': 'application/json',
-
-          },
+          "Content-Type": "application/json",
+        },
 
         body: JSON.stringify(newUser),
-
       });
-     
-      
     } catch (err) {
-      console.log('Error: ', err);
+      console.log("Error: ", err);
     }
-
   }
 
   return (
@@ -47,15 +45,13 @@ export const Login = ({props,users, setIsLoggedIn, setIsHome ,setSingleViewUser 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label></Form.Label>
           <Form.Control
-            onChange={(e) =>  {
-                setUserName(e.target.value)
-                //console.log(user_name)
-              }
-            }
+            onChange={(e) => {
+              setUserName(e.target.value);
+              //console.log(user_name)
+            }}
             value={user_name}
             type="text"
             placeholder="Username"
-          
           />
           <br></br>
           <Form.Control
@@ -66,30 +62,26 @@ export const Login = ({props,users, setIsLoggedIn, setIsHome ,setSingleViewUser 
           />{" "}
         </Form.Group>
         <span class="button">
-        <Button
-          variant="primary"
-          type="submit"
-          onClick={()=> 
-          {
-            // setIsHome(false)
-            setIsLoggedIn(false)
-            fetchUserProfile() ;
-            //Trying to get this to go the SingleViewUser compoonent to reflect the users profile data.
-        // Right now it will go to the component but will not return anything because it says 
-           //"cant read properties of undefied". Not sure how to extract the id and get the next component to rend it correctly
-            setSingleViewUser(true);
-            
-           
-            
-          }}
-        >
-          Login
-        </Button>
-        <br></br>
-        <br></br>
-        <Button variant="danger" type="submit" onClick={() => setIsHome(true)}>
-          Cancel
-        </Button>
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={() => {
+              setIsLoggedIn(false);
+              setUserView(true);
+              fetchUserProfile();
+            }}
+          >
+            Login
+          </Button>
+          <br></br>
+          <br></br>
+          <Button
+            variant="danger"
+            type="submit"
+            onClick={() => setIsHome(true)}
+          >
+            Cancel
+          </Button>
         </span>
       </Form>
     </>
