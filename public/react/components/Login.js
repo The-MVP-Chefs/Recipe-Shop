@@ -8,16 +8,13 @@ import Form from "react-bootstrap/Form";
 import { UserHome } from "./UserHome";
 
 export const Login = ({
-  props,
   users,
   setIsLoggedIn,
   setIsHome,
   handleClick,
   setUserHome,
-  userHome,
   setUserView,
 }) => {
-  //console.log(userHome);
   //make the form
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -37,8 +34,9 @@ export const Login = ({
 
         body: JSON.stringify(newUser),
       });
-      await handleClick(loginUser.id);
-      console, log(loginUser.id);
+      //await handleClick(loginUser.id);
+      //The Id is not extracting like it is on the backend in the users.js file.
+      console.log(usersData);
     } catch (err) {
       console.log("Error: ", err);
     }

@@ -32,6 +32,7 @@ export const App = () => {
   const [userSingleViewRecipe, setUserSingleViewRecipe] = useState(null);
   const [userAddingRecipe, setUserAddingRecipe] = useState(false);
   const [userUpdating, setUserUpdating] = useState(false);
+  const [singleViewUser, setSingleViewUser] = useState(null);
 
   async function fetchUsers() {
     try {
@@ -192,59 +193,3 @@ export const App = () => {
     </main>
   );
 };
-
-//   return (
-//     <main>
-//       {isHome ? (
-//         // left is prop right is function}
-//         <Home
-//           setIsHome={setIsHome}
-//           setRecipes={setRecipes}
-//           setIsLoggedIn={setIsLoggedIn}
-//           setIsRegistered={setIsRegistered}
-//         />
-//       ) : isLoggedIn ? (
-//         <Login
-//           users={users}
-//           setIsLoggedIn={setIsLoggedIn}
-//           setIsHome={setIsHome}
-//         />
-//       ) : loginPrompt ? (
-//         <LoginPrompt
-//           setIsLoggedIn={setIsLoggedIn}
-//           setLoginPrompt={setLoginPrompt}
-//           setIsRegistered={setIsRegistered}
-//           setIsHome={setIsHome}
-//           setSingleViewRecipe={setSingleViewRecipe}
-//         />
-//       ) : isRegistered ? (
-//         <Register setIsRegistered={setIsRegistered} setIsHome={setIsHome} />
-//       ) : isUpdating ? (
-//         <UpdateRecipe
-//           props={singleViewRecipe}
-//           setIsUpdating={setIsUpdating}
-//           isUpdating={isUpdating}
-//           setSingleViewRecipe={setSingleViewRecipe}
-//         />
-//       ) : isAddingRecipe ? (
-//         <AddRecipe setIsAddingRecipe={setIsAddingRecipe} />
-//       ) : singleViewRecipe ? (
-//         <SingleViewRecipe
-//           props={singleViewRecipe}
-//           setSingleViewRecipe={setSingleViewRecipe}
-//           setIsUpdating={setIsUpdating}
-//           handleClick={fetchSingleRecipe}
-//         />
-//       ) : (
-//         <div id="recipes">
-//           <RecipesList
-//             recipes={recipes}
-//             handleClick={fetchSingleRecipe}
-//             setIsAddingRecipe={setIsAddingRecipe}
-//             setIsHome={setIsHome}
-//           />
-//         </div>
-//       )}
-//     </main>
-//   );
-// };

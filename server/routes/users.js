@@ -81,17 +81,12 @@ router.post("/login", async (req, res, next) => {
     let loginUser = await User.findOne({
       where: { user_name },
     });
-    console.log("Login user = : ", loginUser);
-    // console.log("id = :", await loginUser.user);
     console.log(loginUser.id);
     // Authenticate the loginUser
     let isMatching = await bcrypt.compare(password, loginUser.password);
     if (isMatching) {
       // If True, the loginUser successfully logged in.
-      //  Deconstructing the User Object by its properties/fields.
-
       // take id and pass it in to get that one users info
-      // res.send({ message: "Successful Login"});
       let usersData = await User.findByPk(loginUser.id);
       res.send(usersData);
     } else {
