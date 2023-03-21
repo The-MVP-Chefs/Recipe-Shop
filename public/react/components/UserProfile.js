@@ -1,1 +1,0 @@
-//will have info from user models and a button to see all recipes once button is pressed will need to go back to login or register. have button with hover effect. 

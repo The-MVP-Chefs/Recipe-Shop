@@ -40,10 +40,8 @@ you need to install the following packages:
 - `npm install bcrypt`
 
 After installing these packages, you can start the server by running the following command:
-
-- `npm start -dev`
-
-To start the client server, use the following command:
-
-- `npm start client -server`
+-`npm run seed`
+-`npm run server-dev`
+In a seperate terminal
+-` npm run client-dev`
 

@@ -1,16 +1,17 @@
 import React from "react";
-import { Recipe } from "./Recipe";
+import { UserRecipe } from "./UserRecipe";
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
-
-export const RecipesList = ({
+//want users to see this list after they log in and have functionality of website
+export const UserRecipesList = ({
   recipes,
   handleClick,
   setIsAddingRecipe,
   setIsHome,
+  setLoginPrompt,
 }) => {
-  console.log("On recipe list componet");
+  console.log("User recipe List component");
   return (
     <>
       <span class="button">
@@ -29,7 +30,9 @@ export const RecipesList = ({
       </span>
 
       {recipes.map((recipe, idx) => {
-        return <Recipe recipe={recipe} key={idx} handleClick={handleClick} />;
+        return (
+          <UserRecipe recipe={recipe} key={idx} handleClick={handleClick} />
+        );
       })}
     </>
   );
