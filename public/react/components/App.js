@@ -6,14 +6,13 @@ import { Home } from "./Home";
 import { Login } from "./Login";
 import { Register } from "./Register";
 import { LoginPrompt } from "./LoginPrompt";
-//user specific componments
+//user specific components
 import { UserView } from "./UserView";
 import { UserHome } from "./UserHome";
 import { UserAddRecipe } from "./UserAddRecipe";
 import { UserUpdateRecipe } from "./UserUpdateRecipe";
-// import { UserRecipesList } from "./UserRecipeList";
-// import { UserRecipe } from "./UserRecipe";
 import { UserSingleViewRecipe } from "./UserSingleviewRecipe";
+
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -86,15 +85,6 @@ export const App = () => {
           setIsLoggedIn={setIsLoggedIn}
           setIsRegistered={setIsRegistered}
         />
-      ) : userHome ? (
-        <UserHome
-          userHome={userHome}
-          setUserHome={setUserHome}
-          setRecipes={setRecipes}
-          recipes={recipes}
-          //handleClick={fetchSingleRecipe}
-          // setUserAddingRecipe={setUserAddingRecipe}
-        />
       ) : isLoggedIn ? (
         <Login
           users={users}
@@ -161,6 +151,15 @@ export const App = () => {
           userHome={userHome}
           setUserView={setUserView}
           userView={userView}
+        />
+      ) : userHome ? (
+        <UserHome
+        //userHome={userHome}
+        // setUserHome={setUserHome}
+        // setRecipes={setRecipes}
+        // recipes={recipes}
+        // //handleClick={fetchSingleRecipe}
+        // // setUserAddingRecipe={setUserAddingRecipe}
         />
       ) : singleViewRecipe ? (
         <SingleViewRecipe
