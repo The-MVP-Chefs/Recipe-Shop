@@ -1,49 +1,45 @@
 import React, { useState } from "react";
 import apiURL from "../api";
+import { User } from "./User";
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { UserHome } from "./UserHome";
 
-export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
- 
+export const Login = ({
+  users,
+  setIsLoggedIn,
+  setIsHome,
+  handleClick,
+  setUserHome,
+  setUserView,
+}) => {
   //make the form
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   async function fetchUserProfile() {
-    console.log('In fetch user profile');
     let newUser = {
-      user_name  : user_name,
-      password : password
-    }
+      user_name: user_name,
+      password: password,
+    };
     try {
-
       await fetch(`${apiURL}/users/login`, {
-        method: 'POST',
+        method: "POST",
 
         headers: {
-
-          'Content-Type': 'application/json',
-
-          },
+          "Content-Type": "application/json",
+        },
 
         body: JSON.stringify(newUser),
-
       });
-      console.log(newUser);
-      // setItem(initialItem);
-
-      // setIsAddingItem(false);
-
-      // fetchItems();
-
+      //await handleClick(loginUser.id);
+      //The Id is not extracting like it is on the backend in the users.js file.
+      console.log(usersData);
     } catch (err) {
-
-      console.log('Error: ', err);
-
+      console.log("Error: ", err);
     }
-
   }
 
   return (
@@ -53,15 +49,12 @@ export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label></Form.Label>
           <Form.Control
-            onChange={(e) =>  {
-                setUserName(e.target.value)
-                console.log(user_name)
-              }
-            }
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
             value={user_name}
             type="text"
             placeholder="Username"
-          
           />
           <br></br>
           <Form.Control
@@ -72,24 +65,27 @@ export const Login = ({ setIsLoggedIn, setIsHome ,setSingleViewUser }) => {
           />{" "}
         </Form.Group>
         <span class="button">
-        <Button
-          variant="primary"
-          type="submit"
-          onClick={()=> 
-          {
-            setIsHome(false)
-            setIsLoggedIn(false)
-            fetchUserProfile() 
-            
-          }}
-        >
-          Login
-        </Button>
-        <br></br>
-        <br></br>
-        <Button variant="danger" type="submit" onClick={() => setIsHome(true)}>
-          Cancel
-        </Button>
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={() => {
+              fetchUserProfile();
+              setIsLoggedIn(false);
+              setUserView(true);
+              //setUserHome(true);
+            }}
+          >
+            Login
+          </Button>
+          <br></br>
+          <br></br>
+          <Button
+            variant="danger"
+            type="submit"
+            onClick={() => setIsHome(true)}
+          >
+            Cancel
+          </Button>
         </span>
       </Form>
     </>

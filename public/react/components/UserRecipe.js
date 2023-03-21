@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
-export const Recipe = (props) => {
+export const UserRecipe = (props) => {
   return (
     <>
       <div className="test ">
