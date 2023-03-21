@@ -7,17 +7,18 @@ import apiURL from "../api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 
-export const UserView = ({ userView, userHome, setUserHome, setUserView }) => {
-  //console.log(userHome);
-  // console.log(userView);
-  // setUserView(false);
-  // setUserHome(true);
-  // console.log(userHome);
-  // console.log(userView);
+export const UserView = ({
+  users,
+  userView,
+  userHome,
+  setUserHome,
+  setUserView,
+}) => {
+  console.log(users.user_name);
 
   return (
     <>
-      <h1>Login Successful!</h1>
+      <h1>Login Successful! {users.user_name}</h1>
       <span class="button">
         <Button
           variant="success"

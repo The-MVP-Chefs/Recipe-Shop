@@ -93,6 +93,7 @@ export const App = () => {
           setIsLoggedIn={setIsLoggedIn}
           setIsHome={setIsHome}
           setUserView={setUserView}
+          handleClick={fetchSingleUser()}
         />
       ) : loginPrompt ? (
         <LoginPrompt
@@ -147,6 +148,7 @@ export const App = () => {
         />
       ) : userView ? (
         <UserView
+          users={users}
           setUserHome={setUserHome}
           userHome={userHome}
           setUserView={setUserView}
@@ -154,12 +156,13 @@ export const App = () => {
         />
       ) : userHome ? (
         <UserHome
-        //userHome={userHome}
-        // setUserHome={setUserHome}
-        // setRecipes={setRecipes}
-        // recipes={recipes}
-        // //handleClick={fetchSingleRecipe}
-        // // setUserAddingRecipe={setUserAddingRecipe}
+          users={users}
+          userHome={userHome}
+          setUserHome={setUserHome}
+          setRecipes={setRecipes}
+          recipes={recipes}
+          //handleClick={fetchSingleRecipe}
+          // setUserAddingRecipe={setUserAddingRecipe}
         />
       ) : singleViewRecipe ? (
         <SingleViewRecipe

@@ -1,9 +1,9 @@
 import React from "react";
-import { Recipe } from "./Recipe";
+import { UserRecipe } from "./UserRecipe";
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
-
+//want users to see this list after they log in and have functionality of website
 export const UserRecipesList = ({
   recipes,
   handleClick,

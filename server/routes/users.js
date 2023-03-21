@@ -1,13 +1,12 @@
-
 const express = require("express");
 const router = express();
 // This is for the database
 const { seed } = require("../seed");
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
- //const jwt = require("jsonwebtoken");
+//const jwt = require("jsonwebtoken");
 router.use(express.json());
-router.use(express.urlencoded({ extended:true}));
+router.use(express.urlencoded({ extended: true }));
 
 // GET / all users
 router.get("/", async (req, res, next) => {
@@ -23,15 +22,14 @@ router.get("/:id", async (req, res, next) => {
   try {
     const users = await User.findOne({
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
     });
     res.json(users);
   } catch (error) {
     next(error);
   }
 });
-
 
 const authUser = async (req, res, next) => {
   const auth = req.header("Authorization");
@@ -55,19 +53,15 @@ const authUser = async (req, res, next) => {
   }
 };
 
-
-
 //register a new user
 router.post("/register", async (req, res, next) => {
   try {
-    const addUser = await User.create(req.body); 
+    const addUser = await User.create(req.body);
     res.json(await User.findAll());
   } catch (error) {
     next(error);
   }
 });
-
-
 
 // // DELETE /user/:id
 // router.delete("/:id", async (req, res, next) => {
@@ -83,25 +77,23 @@ router.post("/register", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   try {
     let { user_name, password } = req.body;
+
     let loginUser = await User.findOne({
       where: { user_name },
     });
-
+    console.log("Login user = : ", loginUser);
+    // console.log("id = :", await loginUser.user);
+    console.log(loginUser.id);
     // Authenticate the loginUser
     let isMatching = await bcrypt.compare(password, loginUser.password);
     if (isMatching) {
       // If True, the loginUser successfully logged in.
       //  Deconstructing the User Object by its properties/fields.
-      const { id } = loginUser;
-      //take id and pass it in to get that one users info 
-      // res.send({ message: "Successful Login"});
-      // let usersData = await User.findOne({
-      //   where: {
-      //     id: loginUser
-      //   }
-      // });
-      // res.send(usersData);
 
+      // take id and pass it in to get that one users info
+      // res.send({ message: "Successful Login"});
+      let usersData = await User.findByPk(loginUser.id);
+      res.send(usersData);
     } else {
       res.send("Please enter the correct password and try again.");
     }
@@ -111,11 +103,8 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-
-
-
 //  checks if someone is a chef
-// // write logic to check if a person is logged in or not. 
+// // write logic to check if a person is logged in or not.
 // router.post("/users", authUser, async (req, res, next) => {
 //   const { isUser } = req.body;
 //   if (!isChef) {
@@ -129,23 +118,20 @@ router.post("/login", async (req, res, next) => {
 //   }
 // });
 
-
-
 //PUT /user/:id (updates user)
 router.put("/:id", async (req, res, next) => {
   router.use(express.json());
   try {
     const [updatedUser, updatedUsers] = await User.update(req.body, {
       where: {
-        id: req.params.id
+        id: req.params.id,
       },
-      returning: true
+      returning: true,
     });
     res.send(updatedUser[0]);
   } catch (error) {
     next(error);
   }
 });
-
 
 module.exports = router;

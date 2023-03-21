@@ -12,6 +12,7 @@ export const Login = ({
   users,
   setIsLoggedIn,
   setIsHome,
+  handleClick,
   setUserHome,
   userHome,
   setUserView,
@@ -22,7 +23,6 @@ export const Login = ({
   const [password, setPassword] = useState("");
 
   async function fetchUserProfile() {
-    //console.log('In fetch user profile');
     let newUser = {
       user_name: user_name,
       password: password,
@@ -37,6 +37,8 @@ export const Login = ({
 
         body: JSON.stringify(newUser),
       });
+      await handleClick(loginUser.id);
+      console, log(loginUser.id);
     } catch (err) {
       console.log("Error: ", err);
     }

@@ -9,8 +9,8 @@ export const RecipesList = ({
   handleClick,
   setIsAddingRecipe,
   setIsHome,
-  //setLoginPrompt,
 }) => {
+  console.log("On recipe list componet");
   return (
     <>
       <span class="button">
