@@ -5,14 +5,18 @@ import { User } from "./User";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { UserHome } from "./UserHome";
 
 export const Login = ({
   props,
   users,
   setIsLoggedIn,
   setIsHome,
+  setUserHome,
+  userHome,
   setUserView,
 }) => {
+  //console.log(userHome);
   //make the form
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -66,8 +70,9 @@ export const Login = ({
             type="submit"
             onClick={() => {
               fetchUserProfile();
-              setUserView(true);
               setIsLoggedIn(false);
+              //setUserView(true);
+              setUserHome(true);
             }}
           >
             Login

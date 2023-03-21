@@ -11,6 +11,7 @@ export const UserRecipesList = ({
   setIsHome,
   setLoginPrompt,
 }) => {
+  console.log("User recipe List component");
   return (
     <>
       <span class="button">

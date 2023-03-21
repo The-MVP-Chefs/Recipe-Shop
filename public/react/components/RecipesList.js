@@ -9,7 +9,7 @@ export const RecipesList = ({
   handleClick,
   setIsAddingRecipe,
   setIsHome,
-  setLoginPrompt,
+  //setLoginPrompt,
 }) => {
   return (
     <>

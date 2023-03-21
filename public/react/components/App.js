@@ -87,11 +87,18 @@ export const App = () => {
           setIsRegistered={setIsRegistered}
         />
       ) : userHome ? (
-        // left is prop right is function}
-        <UserHome setUserHome={setUserHome} setRecipes={setRecipes} />
+        <UserHome
+          userHome={userHome}
+          setUserHome={setUserHome}
+          setRecipes={setRecipes}
+          recipes={recipes}
+          //handleClick={fetchSingleRecipe}
+          // setUserAddingRecipe={setUserAddingRecipe}
+        />
       ) : isLoggedIn ? (
         <Login
           users={users}
+          setUserHome={setUserHome}
           setRecipes={setRecipes}
           setIsLoggedIn={setIsLoggedIn}
           setIsHome={setIsHome}
@@ -127,6 +134,7 @@ export const App = () => {
       ) : userUpdating ? (
         <UserUpdateRecipe
           setUserHome={setUserHome}
+          setUserUpdating={setUserUpdating}
           setUserSingleViewRecipe={setUserSingleViewRecipe}
         />
       ) : isAddingRecipe ? (
@@ -148,7 +156,12 @@ export const App = () => {
           setUserView={setUserView}
         />
       ) : userView ? (
-        <UserView setUserHome={setUserHome} setUserView={setUserView} />
+        <UserView
+          setUserHome={setUserHome}
+          userHome={userHome}
+          setUserView={setUserView}
+          userView={userView}
+        />
       ) : singleViewRecipe ? (
         <SingleViewRecipe
           props={singleViewRecipe}
