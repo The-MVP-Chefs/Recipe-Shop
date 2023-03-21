@@ -71,8 +71,8 @@ export const Login = ({
             onClick={() => {
               fetchUserProfile();
               setIsLoggedIn(false);
-              //setUserView(true);
-              setUserHome(true);
+              setUserView(true);
+              //setUserHome(true);
             }}
           >
             Login
