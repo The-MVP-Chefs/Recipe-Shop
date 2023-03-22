@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 export const UserRecipesList = ({
   recipes,
   handleClick,
-  setIsAddingRecipe,
+  setUserAddingRecipe,
   setIsHome,
   setLoginPrompt,
 }) => {
@@ -18,7 +18,7 @@ export const UserRecipesList = ({
         <Button
           variant="success"
           type="submit"
-          onClick={() => setIsAddingRecipe(true)}
+          onClick={() => setUserAddingRecipe(true)}
         >
           Add a New Recipe
         </Button>

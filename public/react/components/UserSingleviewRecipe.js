@@ -44,13 +44,13 @@ export const UserSingleViewRecipe = ({
           </Button>
           <br></br>
           <br></br>
-          <Button variant="success" onClick={() => setIsUpdating(true)}>
+          <Button variant="success" onClick={() => setUserUpdating(true)}>
             Update
           </Button>
         </Card.Body>
       </Card>
       <br></br>
-      <Button variant="primary" onClick={() => setSingleViewRecipe(null)}>
+      <Button variant="primary" onClick={() => setUserSingleView(null)}>
         Back to All Items
       </Button>
     </>

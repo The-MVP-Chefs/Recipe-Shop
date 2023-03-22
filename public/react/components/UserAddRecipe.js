@@ -5,7 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export const UserAddRecipe = ({ props, setIsAddingRecipe }) => {
+export const UserAddRecipe = ({
+  props,
+  setUserAddingRecipe,
+  setUserHome,
+  setIsHome,
+}) => {
   //make the form
   const [recipeName, setRecipe] = useState("");
   const [userId, setUserId] = useState("");
@@ -14,7 +19,8 @@ export const UserAddRecipe = ({ props, setIsAddingRecipe }) => {
   const [recipeImage, setRecipeImage] = useState("");
 
   async function handleSubmit(ev) {
-    //event.preventDefault();
+    ev.preventDefault();
+    setIsHome(false);
     const response = await fetch(`${apiURL}/recipes/`, {
       method: "POST",
       headers: {
@@ -30,8 +36,11 @@ export const UserAddRecipe = ({ props, setIsAddingRecipe }) => {
     });
 
     const data = await response.json();
-    setIsAddingRecipe(null);
-    refreshPage();
+
+    setUserAddingRecipe(null);
+    setUserHome(true);
+
+    // refreshPage();
   }
 
   function refreshPage() {

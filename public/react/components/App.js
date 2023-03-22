@@ -144,12 +144,9 @@ export const App = () => {
         />
       ) : userAddingRecipe ? (
         <UserAddRecipe
-          setIsLoggedIn={setIsLoggedIn}
-          setLoginPrompt={setLoginPrompt}
-          setIsRegistered={setIsRegistered}
+          setUserAddingRecipe={setUserAddingRecipe}
+          setUserHome={setUserHome}
           setIsHome={setIsHome}
-          setSingleViewRecipe={setSingleViewRecipe}
-          setUserView={setUserView}
         />
       ) : userView ? (
         <UserView
@@ -206,5 +203,3 @@ export const App = () => {
     </main>
   );
 };
-
-//previous ternary statement with recipes list as default

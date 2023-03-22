@@ -14,6 +14,7 @@ export const Home = ({
 }) => {
   async function handleViewAll(ev) {
     try {
+      setGeneralView(true);
       const response = await fetch(`${apiURL}/recipes`);
       const recipesData = await response.json();
 
@@ -22,7 +23,6 @@ export const Home = ({
       console.log("Oh no an error! ", err);
     }
     setIsHome(false);
-    setGeneralView(true);
   }
 
   function refreshPage() {
@@ -54,6 +54,7 @@ export const Home = ({
             setIsLoggedIn(true);
             setIsHome(false);
             setIsRegistered(false);
+            //setGeneralView(true);
           }}
         >
           Login
