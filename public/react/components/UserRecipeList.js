@@ -9,9 +9,18 @@ export const UserRecipesList = ({
   handleClick,
   setUserAddingRecipe,
   setIsHome,
+  //ADDING THESE DO IT DOESNT GO TO LOGIN PROMPT
   setLoginPrompt,
+  setIsUpdating,
+  setIsAddingRecipe,
+  loginPrompt,
+  isUpdating,
+  isAddingRecipe,
 }) => {
-  console.log("User recipe List component");
+  // console.log("UserRecipeList component");
+  // console.log(loginPrompt);
+  // console.log(isUpdating);
+  // console.log(isAddingRecipe);
   return (
     <>
       <span class="button">

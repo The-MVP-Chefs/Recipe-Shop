@@ -3,10 +3,11 @@ import apiURL from "../api";
 
 export const UserUpdateRecipe = ({
   props,
-  isUpdating,
+  setUserUpdating,
+  setUserSingleViewRecipe,
+  //ADDING THESE DO IT DOESNT GO TO LOGIN PROMPT
+  setLoginPrompt,
   setIsUpdating,
-  setSingleViewRecipe,
-  isAddingRecipe,
   setIsAddingRecipe,
 }) => {
   //make the form
@@ -17,6 +18,9 @@ export const UserUpdateRecipe = ({
   const [recipeImage, setRecipeImage] = useState("");
 
   async function handleUpdate(ev) {
+    setLoginPrompt(false);
+    setIsUpdating(false);
+    setIsAddingRecipe(false);
     const response = await fetch(`${apiURL}/recipes/${props.id}`, {
       method: "PUT",
       headers: {
@@ -31,8 +35,9 @@ export const UserUpdateRecipe = ({
       }),
     });
     //const data = await response.json();
-    setSingleViewRecipe(null);
-    setIsUpdating(null);
+
+    setUserUpdating(null);
+    setUserSingleViewRecipe(null);
     refreshPage();
   }
 
@@ -118,7 +123,7 @@ export const UserUpdateRecipe = ({
         <button onClick={handleUpdate} id="add">
           Update this Recipe
         </button>
-        <button onClick={() => setIsUpdating(false)} id="back">
+        <button onClick={() => setUserUpdating(false)} id="back">
           Back to Recipe
         </button>
       </div>

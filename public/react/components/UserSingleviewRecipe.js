@@ -5,21 +5,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
+//import { isNullLiteral } from "@babel/types";
 
 export const UserSingleViewRecipe = ({
   props,
-  setUserView,
-  setSingleViewRecipe,
-  isDeleted,
   setIsDeleted,
-  setIsUpdating,
+  setUserSingleViewRecipe,
+  setUserUpdating,
+  userUpdating,
 }) => {
   async function handleDelete(ev) {
     const response = await fetch(`${apiURL}/recipes/${props.id}`, {
       method: "DELETE",
     });
     const data = await response.json();
-    setSingleViewRecipe(null);
+    setUserSingleViewRecipe(false);
     setIsDeleted(true);
     refreshPage();
   }
@@ -27,6 +27,8 @@ export const UserSingleViewRecipe = ({
   function refreshPage() {
     window.location.reload(false);
   }
+  console.log("On the User Single Recipe Comp");
+  console.log(userUpdating);
   return (
     <>
       <Card style={{ width: "18rem" }}>
@@ -50,7 +52,7 @@ export const UserSingleViewRecipe = ({
         </Card.Body>
       </Card>
       <br></br>
-      <Button variant="primary" onClick={() => setUserSingleView(null)}>
+      <Button variant="primary" onClick={() => setUserSingleViewRecipe(null)}>
         Back to All Items
       </Button>
     </>
