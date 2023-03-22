@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export const Register = ({ setIsRegistered, setIsHome }) => {
+export const Register = ({ setIsRegistered, setIsHome, setIsLoggedIn }) => {
   //make the form
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -16,23 +16,25 @@ export const Register = ({ setIsRegistered, setIsHome }) => {
   const [userImage, setUserImage] = useState("");
 
   async function handleSubmit(ev) {
-    //event.preventDefault();
-    const response = await fetch(`${apiURL}/recipes/`, {
+    ev.preventDefault();
+    const response = await fetch(`${apiURL}/users/register/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        recipeName,
-        userId,
-        ingredients,
-        isVegan,
-        recipeImage,
+        user_name,
+        password,
+        isChef,
+        dietary_restrictions,
+        userImage,
       }),
     });
 
     const data = await response.json();
-    setIsAddingRecipe(null);
+    console.log(data);
+    setIsRegistered(null);
+    setIsLoggedIn(true);
     refreshPage();
   }
 

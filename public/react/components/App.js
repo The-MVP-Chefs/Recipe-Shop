@@ -116,6 +116,7 @@ export const App = () => {
           setIsRegistered={setIsRegistered}
           setIsHome={setIsHome}
           setUserView={setUserView}
+          setIsLoggedIn={setIsLoggedIn}
         />
       ) : isUpdating ? (
         <LoginPrompt
