@@ -33,10 +33,10 @@ export const Register = ({ setIsRegistered, setIsHome, setIsLoggedIn }) => {
 
     const data = await response.json();
     console.log(data);
-    setIsLoggedIn(true);
-    setIsRegistered(null);
     
-    refreshPage();
+    setIsRegistered(null);
+    setIsLoggedIn(true);
+    // refreshPage();
   }
 
   function refreshPage() {
@@ -89,7 +89,10 @@ export const Register = ({ setIsRegistered, setIsHome, setIsLoggedIn }) => {
           />
         </Form.Group>
         <span class="button">
-          <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
+          <Button variant="primary" type="submit" onClick={(e) => {
+            // setIsLoggedIn(true);
+            handleSubmit(e)
+          } }>
             Register
           </Button>
           <br></br>
