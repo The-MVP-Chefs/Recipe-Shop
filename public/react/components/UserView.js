@@ -18,7 +18,7 @@ export const UserView = ({
 
   return (
     <>
-      <h1>Login Successful! {users.user_name}</h1>
+      <h1>Login Successful! </h1>
       <span class="button">
         <Button
           variant="success"

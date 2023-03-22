@@ -12,6 +12,7 @@ import { UserHome } from "./UserHome";
 import { UserAddRecipe } from "./UserAddRecipe";
 import { UserUpdateRecipe } from "./UserUpdateRecipe";
 import { UserSingleViewRecipe } from "./UserSingleviewRecipe";
+import { UserRecipesList } from "./UserRecipeList";
 
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -33,6 +34,7 @@ export const App = () => {
   const [userAddingRecipe, setUserAddingRecipe] = useState(false);
   const [userUpdating, setUserUpdating] = useState(false);
   const [singleViewUser, setSingleViewUser] = useState(null);
+  const [generalView, setGeneralView] = useState(null);
 
   async function fetchUsers() {
     try {
@@ -81,6 +83,7 @@ export const App = () => {
       {isHome ? (
         // left is prop right is function}
         <Home
+          setGeneralView={setGeneralView}
           setIsHome={setIsHome}
           setRecipes={setRecipes}
           setIsLoggedIn={setIsLoggedIn}
@@ -180,7 +183,7 @@ export const App = () => {
           handleClick={fetchSingleRecipe}
           setLoginPrompt={setLoginPrompt}
         />
-      ) : (
+      ) : generalView ? (
         <div id="recipes">
           <RecipesList
             recipes={recipes}
@@ -189,7 +192,18 @@ export const App = () => {
             setIsHome={setIsHome}
           />
         </div>
+      ) : (
+        <div id="recipes">
+          <UserRecipesList
+            recipes={recipes}
+            handleClick={fetchSingleRecipe}
+            setUserAddingRecipe={setUserAddingRecipe}
+            setUserHome={setUserHome}
+          />
+        </div>
       )}
     </main>
   );
 };
+
+//previous ternary statement with recipes list as default

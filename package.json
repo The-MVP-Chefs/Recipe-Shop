@@ -31,5 +31,17 @@
     "babel-jest": "^27.1.0",
     "jest": "^27.1.0",
     "react-test-renderer": "^17.0.2"
-  }
+  },
+  "description": "The Recipe-Shop Application is a simple yet powerful recipe management tool  developed by a team of apprenticing developers to help you manage your recipes with ease.  The application is designed to allow users to create, edit, and share  their favorite recipes with others.",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/The-MVP-Chefs/Recipe-Shop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/The-MVP-Chefs/Recipe-Shop/issues"
+  },
+  "homepage": "https://github.com/The-MVP-Chefs/Recipe-Shop#readme"
 }
