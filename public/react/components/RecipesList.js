@@ -1,5 +1,6 @@
 import React from "react";
 import { Recipe } from "./Recipe";
+
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
@@ -10,7 +11,7 @@ export const RecipesList = ({
   setIsAddingRecipe,
   setIsHome,
 }) => {
-  console.log("On recipe list componet");
+  console.log("On General view, can read before logged in");
   return (
     <>
       <span class="button">

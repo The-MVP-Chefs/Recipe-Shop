@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import apiURL from "../api";
-import { User } from "./User";
+// import { User } from "./User";
+
+
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
@@ -36,10 +38,13 @@ export const Login = ({
       });
       //await handleClick(loginUser.id);
       //The Id is not extracting like it is on the backend in the users.js file.
-      console.log(usersData);
+      
+      console.log("The users model is: " , users);
     } catch (err) {
       console.log("Error: ", err);
     }
+
+    // console.log("The value of the users: ", users);
   }
 
   return (
@@ -71,8 +76,8 @@ export const Login = ({
             onClick={() => {
               fetchUserProfile();
               setIsLoggedIn(false);
-              setUserView(true);
-              //setUserHome(true);
+              //setUserView(true);
+              setUserHome(true);
             }}
           >
             Login
