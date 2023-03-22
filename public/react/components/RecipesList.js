@@ -29,7 +29,9 @@ export const RecipesList = ({
       </span>
 
       {recipes.map((recipe, idx) => {
-        return <Recipe recipe={recipe} key={idx} handleClick={handleClick} />;
+        return (
+          <UserRecipe recipe={recipe} key={idx} handleClick={handleClick} />
+        );
       })}
     </>
   );
