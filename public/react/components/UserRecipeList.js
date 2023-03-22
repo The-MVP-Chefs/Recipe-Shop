@@ -17,10 +17,6 @@ export const UserRecipesList = ({
   isUpdating,
   isAddingRecipe,
 }) => {
-  // console.log("UserRecipeList component");
-  // console.log(loginPrompt);
-  // console.log(isUpdating);
-  // console.log(isAddingRecipe);
   return (
     <>
       <span class="button">

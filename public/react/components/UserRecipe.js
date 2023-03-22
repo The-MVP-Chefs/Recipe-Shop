@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 export const UserRecipe = (props) => {
-  
+  console.log("You are on the UserRecipe")
 
   return (
     <>
