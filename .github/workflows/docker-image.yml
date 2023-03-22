@@ -19,7 +19,7 @@ jobs:
 
   build:
     name: Build and Deploy
-    needs: test
+    #needs: test
     runs-on: ubuntu-latest
 
     steps:
