@@ -13,6 +13,7 @@ export const LoginPrompt = ({
   setSingleViewRecipe,
   setLoginPrompt,
 }) => {
+  console.log("YOU ARE ON LOGIN PROMPT!");
   return (
     <>
       <h1>Please Login or Register to perform this function</h1>
@@ -54,6 +55,7 @@ export const LoginPrompt = ({
           onClick={() => {
             setLoginPrompt(false);
             setSingleViewRecipe(null);
+            setIsHome(true);
           }}
         >
           Back

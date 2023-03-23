@@ -8,10 +8,8 @@ export const UserRecipesList = ({
   recipes,
   handleClick,
   setUserAddingRecipe,
-  setIsHome,
-  setLoginPrompt,
+  setUserHome,
 }) => {
-  console.log("User recipe List component");
   return (
     <>
       <span class="button">
@@ -24,7 +22,11 @@ export const UserRecipesList = ({
         </Button>
         <br></br>
         <br></br>
-        <Button variant="primary" type="submit" onClick={() => setIsHome(true)}>
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={() => setUserHome(true)}
+        >
           Return Home
         </Button>
       </span>

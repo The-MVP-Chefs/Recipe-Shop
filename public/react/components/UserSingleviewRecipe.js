@@ -8,25 +8,27 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 export const UserSingleViewRecipe = ({
   props,
-  setUserView,
-  setSingleViewRecipe,
-  isDeleted,
+  setUserSingleViewRecipe,
+  setUserHome,
   setIsDeleted,
-  setIsUpdating,
+  setUserUpdating,
 }) => {
   async function handleDelete(ev) {
+    console.log("DELETE FUNCTION ACTIVATED");
     const response = await fetch(`${apiURL}/recipes/${props.id}`, {
       method: "DELETE",
     });
     const data = await response.json();
-    setSingleViewRecipe(null);
+    setUserSingleViewRecipe(null);
     setIsDeleted(true);
-    refreshPage();
+    setUserHome(true);
+    //refreshPage();
   }
 
   function refreshPage() {
     window.location.reload(false);
   }
+
   return (
     <>
       <Card style={{ width: "18rem" }}>
@@ -50,7 +52,7 @@ export const UserSingleViewRecipe = ({
         </Card.Body>
       </Card>
       <br></br>
-      <Button variant="primary" onClick={() => setUserSingleView(null)}>
+      <Button variant="primary" onClick={() => setUserSingleViewRecipe(null)}>
         Back to All Items
       </Button>
     </>

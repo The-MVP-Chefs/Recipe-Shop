@@ -7,7 +7,7 @@ import { Login } from "./Login";
 import { Register } from "./Register";
 import { LoginPrompt } from "./LoginPrompt";
 //user specific components
-import { UserView } from "./UserView";
+
 import { UserHome } from "./UserHome";
 import { UserAddRecipe } from "./UserAddRecipe";
 import { UserUpdateRecipe } from "./UserUpdateRecipe";
@@ -27,14 +27,15 @@ export const App = () => {
   const [isUpdating, setIsUpdating] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
   //pieces of state exclusive to users
-  const [userView, setUserView] = useState(false);
+
   const [userHome, setUserHome] = useState(false);
   const [userSingleViewRecipe, setUserSingleViewRecipe] = useState(null);
   const [userAddingRecipe, setUserAddingRecipe] = useState(false);
   const [userUpdating, setUserUpdating] = useState(false);
-  const [singleViewUser, setSingleViewUser] = useState(null);
   const [generalView, setGeneralView] = useState(null);
+  const [singleViewUser, setSingleViewUser] = useState(null);
 
   async function fetchUsers() {
     try {
@@ -57,12 +58,23 @@ export const App = () => {
       console.log("Oh no an error! ", err);
     }
   }
-
+  //for general ppl to fetch
   async function fetchSingleRecipe(id) {
     try {
       const response = await fetch(`${apiURL}/recipes/${id}`);
       const recipe = await response.json();
       setSingleViewRecipe(recipe);
+    } catch (err) {
+      console.log("Oh no an error! ", err);
+    }
+  }
+
+  //for users to fetch
+  async function fetchSingleRecipeAsUser(id) {
+    try {
+      const response = await fetch(`${apiURL}/recipes/${id}`);
+      const recipe = await response.json();
+      setUserSingleViewRecipe(recipe);
     } catch (err) {
       console.log("Oh no an error! ", err);
     }
@@ -96,7 +108,6 @@ export const App = () => {
           setRecipes={setRecipes}
           setIsLoggedIn={setIsLoggedIn}
           setIsHome={setIsHome}
-          setUserView={setUserView}
           handleClick={fetchSingleUser()}
         />
       ) : loginPrompt ? (
@@ -109,13 +120,11 @@ export const App = () => {
           setIsRegistered={setIsRegistered}
           setIsHome={setIsHome}
           setSingleViewRecipe={setSingleViewRecipe}
-          setUserView={setUserView}
         />
       ) : isRegistered ? (
         <Register
           setIsRegistered={setIsRegistered}
           setIsHome={setIsHome}
-          setUserView={setUserView}
           setIsLoggedIn={setIsLoggedIn}
         />
       ) : isUpdating ? (
@@ -125,12 +134,14 @@ export const App = () => {
           setIsRegistered={setIsRegistered}
           setIsHome={setIsHome}
           setSingleViewRecipe={setSingleViewRecipe}
-          setUserView={setUserView}
         />
       ) : userUpdating ? (
         <UserUpdateRecipe
-          setUserHome={setUserHome}
+          fetchRecipes={fetchRecipes}
+          setIsHome={setIsHome}
+          props={UserSingleViewRecipe}
           setUserUpdating={setUserUpdating}
+          userUpdating={userUpdating}
           setUserSingleViewRecipe={setUserSingleViewRecipe}
         />
       ) : isAddingRecipe ? (
@@ -140,21 +151,12 @@ export const App = () => {
           setIsRegistered={setIsRegistered}
           setIsHome={setIsHome}
           setSingleViewRecipe={setSingleViewRecipe}
-          setUserView={setUserView}
         />
       ) : userAddingRecipe ? (
         <UserAddRecipe
           setUserAddingRecipe={setUserAddingRecipe}
           setUserHome={setUserHome}
           setIsHome={setIsHome}
-        />
-      ) : userView ? (
-        <UserView
-          users={users}
-          setUserHome={setUserHome}
-          userHome={userHome}
-          setUserView={setUserView}
-          userView={userView}
         />
       ) : userHome ? (
         <UserHome
@@ -163,8 +165,6 @@ export const App = () => {
           setUserHome={setUserHome}
           setRecipes={setRecipes}
           recipes={recipes}
-          //handleClick={fetchSingleRecipe}
-          // setUserAddingRecipe={setUserAddingRecipe}
         />
       ) : singleViewRecipe ? (
         <SingleViewRecipe
@@ -177,9 +177,12 @@ export const App = () => {
       ) : userSingleViewRecipe ? (
         <UserSingleViewRecipe
           props={userSingleViewRecipe}
-          setUserUpdating={setUserSingleViewRecipe}
+          setUserSingleViewRecipe={setUserSingleViewRecipe}
+          setUserUpdating={setUserUpdating}
           handleClick={fetchSingleRecipe}
-          setLoginPrompt={setLoginPrompt}
+          isDeleted={isDeleted}
+          setIsDeleted={setIsDeleted}
+          setUserHome={setUserHome}
         />
       ) : generalView ? (
         <div id="recipes">
@@ -193,8 +196,14 @@ export const App = () => {
       ) : (
         <div id="recipes">
           <UserRecipesList
+            loginPrompt={loginPrompt}
+            isUpdating={isUpdating}
+            isAddingRecipe={isAddingRecipe}
+            setIsUpdating={setIsUpdating}
+            setIsAddingRecipe={setIsAddingRecipe}
+            setLoginPrompt={setLoginPrompt}
             recipes={recipes}
-            handleClick={fetchSingleRecipe}
+            handleClick={fetchSingleRecipeAsUser}
             setUserAddingRecipe={setUserAddingRecipe}
             setUserHome={setUserHome}
           />

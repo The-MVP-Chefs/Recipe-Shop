@@ -23,7 +23,7 @@ export const UserHome = ({ users, setUserHome, setRecipes }) => {
   // function refreshPage() {
   //   window.location.reload(false);
   // }
-  console.log(users.name);
+  //console.log(users.name);
   //need to get user props to show and also want to be able to go to User recipe List from here
   return (
     <>

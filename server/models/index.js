@@ -1,5 +1,5 @@
-const {Sequelize} = require('sequelize')
-const {sequelize} = require('../db')
+const { Sequelize } = require("sequelize");
+const { sequelize } = require("../db");
 
 const User = sequelize.define("user", {
   id: {
@@ -27,11 +27,8 @@ const User = sequelize.define("user", {
   userImage: {
     type: Sequelize.STRING,
     allowNull: false,
-  }
- 
- 
+  },
 });
-
 
 const Recipe = sequelize.define("recipe", {
   id: {
@@ -63,7 +60,7 @@ const Recipe = sequelize.define("recipe", {
   recipeImage: {
     type: Sequelize.STRING,
     allowNull: false,
-  }
+  },
 });
 
 //One-To-Many Relationship
@@ -72,5 +69,5 @@ User.hasMany(Recipe, { as: "recipes", foreignKey: "userId" });
 module.exports = {
   db: sequelize,
   User,
-  Recipe
+  Recipe,
 };

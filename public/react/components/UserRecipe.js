@@ -5,9 +5,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 export const UserRecipe = (props) => {
-  console.log(
-    "user recipe component, this is the card for how recipes show up"
-  );
+  console.log("You are on the UserRecipe")
+
   return (
     <>
       <div className="test ">
