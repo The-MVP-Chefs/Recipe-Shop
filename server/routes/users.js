@@ -53,12 +53,41 @@ const authUser = async (req, res, next) => {
   }
 };
 
-//register a new user
+// //register a new user
+// router.post("/register", async (req, res, next) => {
+//   try {
+//     const addUser = await User.create(req.body);
+//     res.json(await User.findAll());
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 router.post("/register", async (req, res, next) => {
   try {
-    const addUser = await User.create(req.body);
-    res.json(await User.findAll());
+    let { user_name, password, isChef, dietary_restrictions, userImage } =
+      req.body;
+    //create the salt
+    let salt = await bcrypt.genSalt(5);
+
+    //use bcrypt to hash the password
+    const hashedPw = await bcrypt.hash(password, salt);
+
+    //add user to db
+    let createdUser = await User.create({
+      user_name,
+      isChef,
+      dietary_restrictions,
+      userImage,
+      password: hashedPw,
+    });
+    console.log(createdUser);
+
+    res.send({
+      messge: `New chef ${user_name} Successfully Registered`,
+    });
   } catch (error) {
+    console.error(error);
     next(error);
   }
 });
