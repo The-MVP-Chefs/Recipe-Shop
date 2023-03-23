@@ -48,7 +48,6 @@ export const Home = ({
         <br></br>
         <Button
           variant="primary"
-          s
           type="submit"
           onClick={() => {
             setIsLoggedIn(true);

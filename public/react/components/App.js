@@ -137,6 +137,8 @@ export const App = () => {
         />
       ) : userUpdating ? (
         <UserUpdateRecipe
+          fetchRecipes={fetchRecipes}
+          setIsHome={setIsHome}
           props={UserSingleViewRecipe}
           setUserUpdating={setUserUpdating}
           userUpdating={userUpdating}
@@ -178,9 +180,9 @@ export const App = () => {
           setUserSingleViewRecipe={setUserSingleViewRecipe}
           setUserUpdating={setUserUpdating}
           handleClick={fetchSingleRecipe}
-          // props={singleViewRecipe}
-          // setSingleViewRecipe={setSingleViewRecipe}
-          // handleClick={fetchSingleRecipe}
+          isDeleted={isDeleted}
+          setIsDeleted={setIsDeleted}
+          setUserHome={setUserHome}
         />
       ) : generalView ? (
         <div id="recipes">

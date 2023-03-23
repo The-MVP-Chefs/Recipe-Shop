@@ -8,14 +8,7 @@ export const UserRecipesList = ({
   recipes,
   handleClick,
   setUserAddingRecipe,
-  setIsHome,
-  //ADDING THESE DO IT DOESNT GO TO LOGIN PROMPT
-  setLoginPrompt,
-  setIsUpdating,
-  setIsAddingRecipe,
-  loginPrompt,
-  isUpdating,
-  isAddingRecipe,
+  setUserHome,
 }) => {
   return (
     <>
@@ -29,7 +22,11 @@ export const UserRecipesList = ({
         </Button>
         <br></br>
         <br></br>
-        <Button variant="primary" type="submit" onClick={() => setIsHome(true)}>
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={() => setUserHome(true)}
+        >
           Return Home
         </Button>
       </span>

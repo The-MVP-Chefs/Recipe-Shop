@@ -7,11 +7,10 @@ import Form from "react-bootstrap/Form";
 
 export const UserUpdateRecipe = ({
   props,
-  userUpdating,
   setUserUpdating,
   setUserSingleViewRecipe,
-  userAddingRecipe,
-  setUserAddingRecipe,
+  setIsHome,
+  fetchRecipes,
 }) => {
   //make the form
   const [recipeName, setRecipe] = useState("");
@@ -23,6 +22,7 @@ export const UserUpdateRecipe = ({
   async function handleUpdate(ev) {
     // setUserUpdating(false);
     // setUserAddingRecipe(false);
+    
     const response = await fetch(`${apiURL}/recipes/${props.id}`, {
       method: "PUT",
       headers: {
@@ -36,11 +36,9 @@ export const UserUpdateRecipe = ({
         recipeImage,
       }),
     });
-    const data = await response.json();
-
-    setUserSingleViewRecipe(null);
+    setUserSingleViewRecipe(true);
     setUserUpdating(null);
-    //refreshPage();
+    //setUserHome(true);
   }
 
   function refreshPage() {
