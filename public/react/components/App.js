@@ -139,6 +139,7 @@ export const App = () => {
         <UserUpdateRecipe
           props={UserSingleViewRecipe}
           setUserUpdating={setUserUpdating}
+          userUpdating={userUpdating}
           setUserSingleViewRecipe={setUserSingleViewRecipe}
         />
       ) : isAddingRecipe ? (

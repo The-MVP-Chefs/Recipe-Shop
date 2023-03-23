@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import apiURL from "../api";
+//bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 export const UserUpdateRecipe = ({
   props,
+  userUpdating,
   setUserUpdating,
   setUserSingleViewRecipe,
-  //ADDING THESE DO IT DOESNT GO TO LOGIN PROMPT
-  setLoginPrompt,
-  setIsUpdating,
-  setIsAddingRecipe,
+  userAddingRecipe,
+  setUserAddingRecipe,
 }) => {
   //make the form
   const [recipeName, setRecipe] = useState("");
@@ -18,9 +21,8 @@ export const UserUpdateRecipe = ({
   const [recipeImage, setRecipeImage] = useState("");
 
   async function handleUpdate(ev) {
-    setLoginPrompt(false);
-    setIsUpdating(false);
-    setIsAddingRecipe(false);
+    // setUserUpdating(false);
+    // setUserAddingRecipe(false);
     const response = await fetch(`${apiURL}/recipes/${props.id}`, {
       method: "PUT",
       headers: {
@@ -34,11 +36,11 @@ export const UserUpdateRecipe = ({
         recipeImage,
       }),
     });
-    //const data = await response.json();
+    const data = await response.json();
 
-    setUserUpdating(null);
     setUserSingleViewRecipe(null);
-    refreshPage();
+    setUserUpdating(null);
+    //refreshPage();
   }
 
   function refreshPage() {
@@ -62,71 +64,70 @@ export const UserUpdateRecipe = ({
 
   return (
     <>
-      <div id="h2">
-        <h2>Update an Recipe</h2>
-      </div>
-      <form>
-        <label>
-          <p>
-            <input
-              type="text"
-              size="50"
-              name="recipeName"
-              placeholder="Recipe Name"
-              value={recipeName}
-              onChange={(ev) => setRecipe(ev.target.value)}
-            />
-          </p>
-          <p>
-            <input
-              type="text"
-              size="50"
-              name="userId"
-              placeholder="Vegan?"
-              value={userId}
-              onChange={(ev) => setUserId(ev.target.value)}
-            />
-          </p>
-          <p>
-            <input
-              type="text"
-              size="50"
-              name="ingredients"
-              placeholder="Ingredients"
-              value={ingredients}
-              onChange={(ev) => setIngredients(ev.target.value)}
-            />
-          </p>
-          <p>
-            <input
-              type="text"
-              size="50"
-              name="isVegan"
-              placeholder="userId"
-              value={isVegan}
-              onChange={(ev) => setIsVegan(ev.target.value)}
-            />
-          </p>
-          <p>
-            <input
-              type="text"
-              size="50"
-              name="recipeImage"
-              placeholder="Image"
-              value={recipeImage}
-              onChange={(ev) => setRecipeImage(ev.target.value)}
-            />
-          </p>
-        </label>
-      </form>
-      <div id="buttons">
-        <button onClick={handleUpdate} id="add">
-          Update this Recipe
-        </button>
-        <button onClick={() => setUserUpdating(false)} id="back">
-          Back to Recipe
-        </button>
-      </div>
+      <Form>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Recipe Name</Form.Label>
+          <Form.Control
+            onChange={(e) => setRecipe(e.target.value)}
+            value={recipeName}
+            type="text"
+            placeholder="Recipe Name"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Ingredients</Form.Label>
+          <Form.Control
+            onChange={(e) => setIngredients(e.target.value)}
+            value={ingredients}
+            type="text"
+            placeholder="Ingredients"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Vegan?</Form.Label>
+          <Form.Control
+            onChange={(e) => setIsVegan(e.target.value)}
+            value={isVegan}
+            type="text"
+            placeholder="Vegan?"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>userId</Form.Label>
+          <Form.Control
+            onChange={(e) => setUserId(e.target.value)}
+            value={userId}
+            type="number"
+            placeholder="userId"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Image</Form.Label>
+          <Form.Control
+            onChange={(e) => setRecipeImage(e.target.value)}
+            value={recipeImage}
+            type="text"
+            placeholder="Image"
+          />
+        </Form.Group>
+
+        <Button variant="primary" type="submit" onClick={handleUpdate}>
+          Update This Recipe
+        </Button>
+        <br></br>
+        <br></br>
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={() => setUserUpdating(false)}
+        >
+          Back
+        </Button>
+      </Form>
     </>
   );
 };
